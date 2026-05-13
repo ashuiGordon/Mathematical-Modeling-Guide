@@ -2,6 +2,8 @@
 
 > 一本面向数学建模竞赛的系统教程，涵盖理论基础、核心方法、高级技术与 AI Native 建模实战。
 
+![demo](assets/demo.gif)
+
 **在线阅读**：[https://ashuigordon.github.io/Mathematical-Modeling-Guide/](https://ashuigordon.github.io/Mathematical-Modeling-Guide/)
 
 ---
