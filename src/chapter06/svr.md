@@ -10,29 +10,29 @@
 
 ### SVM分类回顾
 
-在二分类问题中，SVM寻找超平面 \( \mathbf{w} \cdot \mathbf{x} + b = 0 \)，使得两类样本之间的间隔最大化：
+在二分类问题中，SVM寻找超平面 \\( \mathbf{w} \cdot \mathbf{x} + b = 0 \\)，使得两类样本之间的间隔最大化：
 
-\[
+\\[
 \min_{\mathbf{w}, b} \frac{1}{2} \|\mathbf{w}\|^2
-\]
+\\]
 
 约束条件为：
 
-\[
+\\[
 y_i(\mathbf{w} \cdot \mathbf{x}_i + b) \geq 1, \quad i = 1, 2, \ldots, n
-\]
+\\]
 
 ### 从分类到回归的转变
 
-在回归问题中，目标不再是分离两类样本，而是找到一个函数 \( f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b \)，使得所有样本点尽可能接近该函数。SVR的关键创新在于：
+在回归问题中，目标不再是分离两类样本，而是找到一个函数 \\( f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b \\)，使得所有样本点尽可能接近该函数。SVR的关键创新在于：
 
-- 允许预测值与真实值之间存在不超过 \( \varepsilon \) 的偏差
-- 只对超出 \( \varepsilon \) 管道的样本施加惩罚
-- 通过控制 \( \|\mathbf{w}\|^2 \) 来保证模型的平坦性（泛化能力）
+- 允许预测值与真实值之间存在不超过 \\( \varepsilon \\) 的偏差
+- 只对超出 \\( \varepsilon \\) 管道的样本施加惩罚
+- 通过控制 \\( \|\mathbf{w}\|^2 \\) 来保证模型的平坦性（泛化能力）
 
 ### SVR的几何直觉
 
-SVR构造了一个以 \( f(\mathbf{x}) \) 为中心、宽度为 \( 2\varepsilon \) 的管道。落在管道内部的样本点不产生损失，只有超出管道边界的样本点才对目标函数有贡献。这些超出管道的样本点类似于SVM中的支持向量，决定了最终的回归函数。
+SVR构造了一个以 \\( f(\mathbf{x}) \\) 为中心、宽度为 \\( 2\varepsilon \\) 的管道。落在管道内部的样本点不产生损失，只有超出管道边界的样本点才对目标函数有贡献。这些超出管道的样本点类似于SVM中的支持向量，决定了最终的回归函数。
 
 ---
 
@@ -44,51 +44,51 @@ SVR构造了一个以 \( f(\mathbf{x}) \) 为中心、宽度为 \( 2\varepsilon 
 
 ε-不敏感损失函数定义为：
 
-\[
+\\[
 L_\varepsilon(y, f(\mathbf{x})) = \max(0, |y - f(\mathbf{x})| - \varepsilon)
-\]
+\\]
 
 即：
 
-\[
+\\[
 L_\varepsilon(y, f(\mathbf{x})) = 
 \begin{cases}
 0 & \text{if } |y - f(\mathbf{x})| \leq \varepsilon \\
 |y - f(\mathbf{x})| - \varepsilon & \text{if } |y - f(\mathbf{x})| > \varepsilon
 \end{cases}
-\]
+\\]
 
 ### 与其他损失函数的比较
 
 | 损失函数 | 表达式 | 特点 |
 |---------|--------|------|
-| 平方损失 | \( (y - f(\mathbf{x}))^2 \) | 对异常值敏感 |
-| 绝对损失 | \( \|y - f(\mathbf{x})\| \) | 在零点不可微 |
+| 平方损失 | \\( (y - f(\mathbf{x}))^2 \\) | 对异常值敏感 |
+| 绝对损失 | \\( \|y - f(\mathbf{x})\| \\) | 在零点不可微 |
 | Huber损失 | 分段二次/线性 | 平滑过渡 |
-| ε-不敏感损失 | \( \max(0, \|y-f(\mathbf{x})\|-\varepsilon) \) | 产生稀疏解 |
+| ε-不敏感损失 | \\( \max(0, \|y-f(\mathbf{x})\|-\varepsilon) \\) | 产生稀疏解 |
 
 ### SVR原始优化问题
 
-引入松弛变量 \( \xi_i \) 和 \( \xi_i^* \)，SVR的优化问题表述为：
+引入松弛变量 \\( \xi_i \\) 和 \\( \xi_i^* \\)，SVR的优化问题表述为：
 
-\[
+\\[
 \min_{\mathbf{w}, b, \xi, \xi^*} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^{n} (\xi_i + \xi_i^*)
-\]
+\\]
 
 约束条件：
 
-\[
+\\[
 \begin{cases}
 y_i - \mathbf{w} \cdot \mathbf{x}_i - b \leq \varepsilon + \xi_i \\
 \mathbf{w} \cdot \mathbf{x}_i + b - y_i \leq \varepsilon + \xi_i^* \\
 \xi_i, \xi_i^* \geq 0
 \end{cases}
-\]
+\\]
 
 其中：
-- \( \xi_i \) 表示样本点在管道上方的偏离量
-- \( \xi_i^* \) 表示样本点在管道下方的偏离量
-- \( C > 0 \) 是正则化参数，控制模型复杂度与拟合精度之间的权衡
+- \\( \xi_i \\) 表示样本点在管道上方的偏离量
+- \\( \xi_i^* \\) 表示样本点在管道下方的偏离量
+- \\( C > 0 \\) 是正则化参数，控制模型复杂度与拟合精度之间的权衡
 
 ---
 
@@ -98,65 +98,65 @@ y_i - \mathbf{w} \cdot \mathbf{x}_i - b \leq \varepsilon + \xi_i \\
 
 ### 拉格朗日函数
 
-引入拉格朗日乘子 \( \alpha_i, \alpha_i^* \geq 0 \)（对应不等式约束）以及 \( \eta_i, \eta_i^* \geq 0 \)（对应松弛变量非负约束），构造拉格朗日函数：
+引入拉格朗日乘子 \\( \alpha_i, \alpha_i^* \geq 0 \\)（对应不等式约束）以及 \\( \eta_i, \eta_i^* \geq 0 \\)（对应松弛变量非负约束），构造拉格朗日函数：
 
-\[
+\\[
 L = \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^n(\xi_i + \xi_i^*) - \sum_{i=1}^n \alpha_i(\varepsilon + \xi_i - y_i + \mathbf{w}\cdot\mathbf{x}_i + b)
-\]
-\[
+\\]
+\\[
 \quad - \sum_{i=1}^n \alpha_i^*(\varepsilon + \xi_i^* + y_i - \mathbf{w}\cdot\mathbf{x}_i - b) - \sum_{i=1}^n(\eta_i\xi_i + \eta_i^*\xi_i^*)
-\]
+\\]
 
 ### KKT条件
 
 对原始变量求偏导并令其为零：
 
-\[
+\\[
 \frac{\partial L}{\partial \mathbf{w}} = 0 \Rightarrow \mathbf{w} = \sum_{i=1}^n (\alpha_i - \alpha_i^*)\mathbf{x}_i
-\]
+\\]
 
-\[
+\\[
 \frac{\partial L}{\partial b} = 0 \Rightarrow \sum_{i=1}^n (\alpha_i - \alpha_i^*) = 0
-\]
+\\]
 
-\[
+\\[
 \frac{\partial L}{\partial \xi_i} = 0 \Rightarrow C - \alpha_i - \eta_i = 0
-\]
+\\]
 
-\[
+\\[
 \frac{\partial L}{\partial \xi_i^*} = 0 \Rightarrow C - \alpha_i^* - \eta_i^* = 0
-\]
+\\]
 
 ### 对偶问题的标准形式
 
 将KKT条件代入拉格朗日函数，得到对偶问题：
 
-\[
+\\[
 \max_{\alpha, \alpha^*} -\frac{1}{2}\sum_{i=1}^n\sum_{j=1}^n (\alpha_i - \alpha_i^*)(\alpha_j - \alpha_j^*)\mathbf{x}_i \cdot \mathbf{x}_j - \varepsilon\sum_{i=1}^n(\alpha_i + \alpha_i^*) + \sum_{i=1}^n y_i(\alpha_i - \alpha_i^*)
-\]
+\\]
 
 约束条件：
 
-\[
+\\[
 \begin{cases}
 \sum_{i=1}^n (\alpha_i - \alpha_i^*) = 0 \\
 0 \leq \alpha_i, \alpha_i^* \leq C
 \end{cases}
-\]
+\\]
 
 ### 回归函数的表达
 
 最终的回归函数为：
 
-\[
+\\[
 f(\mathbf{x}) = \sum_{i=1}^n (\alpha_i - \alpha_i^*) \mathbf{x}_i \cdot \mathbf{x} + b
-\]
+\\]
 
-其中只有 \( \alpha_i - \alpha_i^* \neq 0 \) 的样本点（即支持向量）对预测有贡献。偏置项 \( b \) 可通过满足 \( 0 < \alpha_i < C \) 的支持向量计算：
+其中只有 \\( \alpha_i - \alpha_i^* \neq 0 \\) 的样本点（即支持向量）对预测有贡献。偏置项 \\( b \\) 可通过满足 \\( 0 < \alpha_i < C \\) 的支持向量计算：
 
-\[
+\\[
 b = y_i - \sum_{j=1}^n (\alpha_j - \alpha_j^*)\mathbf{x}_j \cdot \mathbf{x}_i - \varepsilon
-\]
+\\]
 
 ---
 
@@ -166,46 +166,46 @@ b = y_i - \sum_{j=1}^n (\alpha_j - \alpha_j^*)\mathbf{x}_j \cdot \mathbf{x}_i - 
 
 ### 核技巧的引入
 
-将对偶问题中的内积 \( \mathbf{x}_i \cdot \mathbf{x}_j \) 替换为核函数 \( K(\mathbf{x}_i, \mathbf{x}_j) \)：
+将对偶问题中的内积 \\( \mathbf{x}_i \cdot \mathbf{x}_j \\) 替换为核函数 \\( K(\mathbf{x}_i, \mathbf{x}_j) \\)：
 
-\[
+\\[
 f(\mathbf{x}) = \sum_{i=1}^n (\alpha_i - \alpha_i^*) K(\mathbf{x}_i, \mathbf{x}) + b
-\]
+\\]
 
 ### 常用核函数
 
 **线性核（Linear Kernel）**
 
-\[
+\\[
 K(\mathbf{x}_i, \mathbf{x}_j) = \mathbf{x}_i \cdot \mathbf{x}_j
-\]
+\\]
 
 适用场景：特征维度高、样本量大、数据近似线性可分的情况。
 
 **多项式核（Polynomial Kernel）**
 
-\[
+\\[
 K(\mathbf{x}_i, \mathbf{x}_j) = (\gamma \mathbf{x}_i \cdot \mathbf{x}_j + r)^d
-\]
+\\]
 
-其中 \( d \) 为多项式阶数，\( \gamma > 0 \)，\( r \geq 0 \)。适用于数据具有多项式关系的场景。
+其中 \\( d \\) 为多项式阶数，\\( \gamma > 0 \\)，\\( r \geq 0 \\)。适用于数据具有多项式关系的场景。
 
 **径向基核（RBF/Gaussian Kernel）**
 
-\[
+\\[
 K(\mathbf{x}_i, \mathbf{x}_j) = \exp\left(-\gamma \|\mathbf{x}_i - \mathbf{x}_j\|^2\right)
-\]
+\\]
 
-其中 \( \gamma = \frac{1}{2\sigma^2} \)。RBF核是最常用的默认选择，具有以下优点：
+其中 \\( \gamma = \frac{1}{2\sigma^2} \\)。RBF核是最常用的默认选择，具有以下优点：
 - 可以映射到无穷维特征空间
-- 只有一个超参数 \( \gamma \)
+- 只有一个超参数 \\( \gamma \\)
 - 对各种非线性关系都有较好的拟合能力
 
 **Sigmoid核**
 
-\[
+\\[
 K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i \cdot \mathbf{x}_j + r)
-\]
+\\]
 
 注意：并非对所有参数组合都满足Mercer条件。
 
@@ -226,43 +226,43 @@ K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i \cdot \mathbf{x}_j + r
 
 ### 参数C（正则化参数）
 
-参数 \( C \) 控制对超出 ε-管道样本的惩罚力度：
+参数 \\( C \\) 控制对超出 ε-管道样本的惩罚力度：
 
 - **C较大**：对训练误差的容忍度低，模型趋向于精确拟合训练数据，可能过拟合
 - **C较小**：对训练误差的容忍度高，模型更加平滑，可能欠拟合
 
-典型取值范围：\( C \in [10^{-2}, 10^{4}] \)
+典型取值范围：\\( C \in [10^{-2}, 10^{4}] \\)
 
 ### 参数ε（不敏感区宽度）
 
-参数 \( \varepsilon \) 决定了管道的宽度：
+参数 \\( \varepsilon \\) 决定了管道的宽度：
 
 - **ε较大**：管道宽，支持向量少，模型简单但可能欠拟合
 - **ε较小**：管道窄，支持向量多，模型复杂但可能过拟合
 
 经验公式（Cherkassky & Ma, 2004）：
 
-\[
+\\[
 \varepsilon = 3\sigma\sqrt{\frac{\ln n}{n}}
-\]
+\\]
 
-其中 \( \sigma \) 为噪声标准差估计，\( n \) 为样本量。
+其中 \\( \sigma \\) 为噪声标准差估计，\\( n \\) 为样本量。
 
 ### 参数γ（RBF核参数）
 
-参数 \( \gamma \) 控制RBF核的宽度：
+参数 \\( \gamma \\) 控制RBF核的宽度：
 
 - **γ较大**：核函数变窄，每个样本影响范围小，模型复杂度高
 - **γ较小**：核函数变宽，每个样本影响范围大，模型趋于平滑
 
-默认值通常取 \( \gamma = \frac{1}{n_{\text{features}}} \) 或 \( \gamma = \frac{1}{n_{\text{features}} \cdot \text{Var}(X)} \)。
+默认值通常取 \\( \gamma = \frac{1}{n_{\text{features}}} \\) 或 \\( \gamma = \frac{1}{n_{\text{features}} \cdot \text{Var}(X)} \\)。
 
 ### 网格搜索与交叉验证
 
 推荐的调参策略：先在对数尺度上粗搜索，再在最优点附近细化：
-- \( C \in \{10^{-2}, 10^{-1}, 1, 10, 10^2, 10^3\} \)
-- \( \gamma \in \{10^{-4}, 10^{-3}, 10^{-2}, 10^{-1}, 1\} \)
-- \( \varepsilon \in \{0.01, 0.05, 0.1, 0.2, 0.5\} \)
+- \\( C \in \{10^{-2}, 10^{-1}, 1, 10, 10^2, 10^3\} \\)
+- \\( \gamma \in \{10^{-4}, 10^{-3}, 10^{-2}, 10^{-1}, 1\} \\)
+- \\( \varepsilon \in \{0.01, 0.05, 0.1, 0.2, 0.5\} \\)
 
 使用k折交叉验证（通常k=5或10）的MSE或MAE作为评估指标。
 
@@ -270,9 +270,9 @@ K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i \cdot \mathbf{x}_j + r
 
 三个参数之间存在耦合关系：
 
-- 增大 \( C \) 时，可适当增大 \( \varepsilon \) 以平衡模型复杂度
-- 增大 \( \gamma \) 时，通常需要减小 \( C \) 以避免过拟合
-- \( \varepsilon \) 与数据噪声水平相关，应根据问题先验知识设定初始范围
+- 增大 \\( C \\) 时，可适当增大 \\( \varepsilon \\) 以平衡模型复杂度
+- 增大 \\( \gamma \\) 时，通常需要减小 \\( C \\) 以避免过拟合
+- \\( \varepsilon \\) 与数据噪声水平相关，应根据问题先验知识设定初始范围
 
 ---
 
@@ -282,11 +282,11 @@ K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i \cdot \mathbf{x}_j + r
 
 ### 问题描述
 
-假设我们有一组房屋数据，包含5个特征：面积（\( x_1 \)）、房间数（\( x_2 \)）、房龄（\( x_3 \)）、距市中心距离（\( x_4 \)）、犯罪率（\( x_5 \)），目标是预测房价 \( y \)（万元）。
+假设我们有一组房屋数据，包含5个特征：面积（\\( x_1 \\)）、房间数（\\( x_2 \\)）、房龄（\\( x_3 \\)）、距市中心距离（\\( x_4 \\)）、犯罪率（\\( x_5 \\)），目标是预测房价 \\( y \\)（万元）。
 
 ### 数据准备
 
-设训练样本为 \( \{(\mathbf{x}_i, y_i)\}_{i=1}^{8} \)：
+设训练样本为 \\( \{(\mathbf{x}_i, y_i)\}_{i=1}^{8} \\)：
 
 | 样本 | 面积(m²) | 房间数 | 房龄(年) | 距离(km) | 犯罪率(%) | 房价(万元) |
 |------|---------|--------|---------|---------|----------|-----------|
@@ -301,73 +301,73 @@ K(\mathbf{x}_i, \mathbf{x}_j) = \tanh(\gamma \mathbf{x}_i \cdot \mathbf{x}_j + r
 
 ### 特征标准化
 
-SVR对特征尺度敏感，需进行标准化。对每个特征 \( x_j \)：
+SVR对特征尺度敏感，需进行标准化。对每个特征 \\( x_j \\)：
 
-\[
+\\[
 \tilde{x}_j = \frac{x_j - \mu_j}{\sigma_j}
-\]
+\\]
 
 以面积特征为例：
-- 均值：\( \mu_1 = \frac{85+120+150+60+200+95+130+110}{8} = 118.75 \)
-- 标准差：\( \sigma_1 = \sqrt{\frac{\sum_{i=1}^{8}(x_{i,1} - \mu_1)^2}{8}} \approx 40.16 \)
+- 均值：\\( \mu_1 = \frac{85+120+150+60+200+95+130+110}{8} = 118.75 \\)
+- 标准差：\\( \sigma_1 = \sqrt{\frac{\sum_{i=1}^{8}(x_{i,1} - \mu_1)^2}{8}} \approx 40.16 \\)
 
 标准化后各样本面积值：
-- 样本1：\( \tilde{x}_{1,1} = \frac{85 - 118.75}{40.16} \approx -0.840 \)
-- 样本2：\( \tilde{x}_{2,1} = \frac{120 - 118.75}{40.16} \approx 0.031 \)
-- 样本5：\( \tilde{x}_{5,1} = \frac{200 - 118.75}{40.16} \approx 2.023 \)
+- 样本1：\\( \tilde{x}_{1,1} = \frac{85 - 118.75}{40.16} \approx -0.840 \\)
+- 样本2：\\( \tilde{x}_{2,1} = \frac{120 - 118.75}{40.16} \approx 0.031 \\)
+- 样本5：\\( \tilde{x}_{5,1} = \frac{200 - 118.75}{40.16} \approx 2.023 \\)
 
-同理对房价目标变量进行标准化（均值 \( \mu_y = 367.5 \)，标准差 \( \sigma_y \approx 157.3 \)）。
+同理对房价目标变量进行标准化（均值 \\( \mu_y = 367.5 \\)，标准差 \\( \sigma_y \approx 157.3 \\)）。
 
 ### 模型构建
 
-选择RBF核，设定参数 \( C=100 \)，\( \varepsilon=0.1 \)，\( \gamma=0.2 \)。对偶问题为：
+选择RBF核，设定参数 \\( C=100 \\)，\\( \varepsilon=0.1 \\)，\\( \gamma=0.2 \\)。对偶问题为：
 
-\[
+\\[
 \max_{\alpha, \alpha^*} -\frac{1}{2}\sum_{i,j}(\alpha_i-\alpha_i^*)(\alpha_j-\alpha_j^*)K(\mathbf{x}_i,\mathbf{x}_j) - \varepsilon\sum_i(\alpha_i+\alpha_i^*) + \sum_i y_i(\alpha_i-\alpha_i^*)
-\]
+\\]
 
 ### 核矩阵计算
 
-计算核矩阵 \( K_{ij} = \exp(-\gamma\|\tilde{\mathbf{x}}_i - \tilde{\mathbf{x}}_j\|^2) \)。以样本1和样本2为例：
-- \( \tilde{\mathbf{x}}_1 = (-0.840, -0.905, -0.714, -0.621, -0.782) \)
-- \( \tilde{\mathbf{x}}_2 = (0.031, 0.302, 0.000, 0.138, 0.054) \)
+计算核矩阵 \\( K_{ij} = \exp(-\gamma\|\tilde{\mathbf{x}}_i - \tilde{\mathbf{x}}_j\|^2) \\)。以样本1和样本2为例：
+- \\( \tilde{\mathbf{x}}_1 = (-0.840, -0.905, -0.714, -0.621, -0.782) \\)
+- \\( \tilde{\mathbf{x}}_2 = (0.031, 0.302, 0.000, 0.138, 0.054) \\)
 
 计算欧氏距离的平方：
 
-\[
+\\[
 \|\tilde{\mathbf{x}}_1 - \tilde{\mathbf{x}}_2\|^2 = (-0.871)^2 + (-1.207)^2 + (-0.714)^2 + (-0.759)^2 + (-0.836)^2 = 4.000
-\]
+\\]
 
 则核函数值为：
 
-\[
+\\[
 K_{12} = \exp(-0.2 \times 4.000) = \exp(-0.800) \approx 0.449
-\]
+\\]
 
-类似地计算完整 \( 8 \times 8 \) 核矩阵后，使用SMO算法求解对偶问题。
+类似地计算完整 \\( 8 \times 8 \\) 核矩阵后，使用SMO算法求解对偶问题。
 
 ### 求解结果与预测
 
 求解得到非零拉格朗日乘子对应的支持向量为样本3、4、5，系数分别为：
 
-\[
+\\[
 \alpha_3 - \alpha_3^* = 45.2, \quad \alpha_4 - \alpha_4^* = -38.7, \quad \alpha_5 - \alpha_5^* = 52.1
-\]
+\\]
 
-偏置项：\( b = -12.3 \)。对新样本 \( \mathbf{x}_{\text{new}} = (140, 3, 6, 3.5, 0.6) \) 预测：
+偏置项：\\( b = -12.3 \\)。对新样本 \\( \mathbf{x}_{\text{new}} = (140, 3, 6, 3.5, 0.6) \\) 预测：
 
-1. 标准化：\( \tilde{\mathbf{x}}_{\text{new}} = (0.529, 0.302, -0.571, -0.501, -0.663) \)
-2. 计算与各支持向量的核函数值 \( K_3, K_4, K_5 \)
-3. 代入：\( \tilde{f}(\mathbf{x}_{\text{new}}) = 45.2 K_3 - 38.7 K_4 + 52.1 K_5 + b \)
-4. 反标准化：\( \hat{y} = \tilde{f} \cdot \sigma_y + \mu_y \) 得到最终预测房价
+1. 标准化：\\( \tilde{\mathbf{x}}_{\text{new}} = (0.529, 0.302, -0.571, -0.501, -0.663) \\)
+2. 计算与各支持向量的核函数值 \\( K_3, K_4, K_5 \\)
+3. 代入：\\( \tilde{f}(\mathbf{x}_{\text{new}}) = 45.2 K_3 - 38.7 K_4 + 52.1 K_5 + b \\)
+4. 反标准化：\\( \hat{y} = \tilde{f} \cdot \sigma_y + \mu_y \\) 得到最终预测房价
 
 ### 模型评估
 
-使用留一交叉验证评估模型性能。经调参后最优参数为 \( C=50 \)，\( \varepsilon=0.05 \)，\( \gamma=0.15 \)：
+使用留一交叉验证评估模型性能。经调参后最优参数为 \\( C=50 \\)，\\( \varepsilon=0.05 \\)，\\( \gamma=0.15 \\)：
 
-- 均方误差：\( \text{MSE} = \frac{1}{n}\sum_{i=1}^n(y_i - \hat{y}_i)^2 \)
-- 平均绝对误差：\( \text{MAE} = \frac{1}{n}\sum_{i=1}^n|y_i - \hat{y}_i| \)
-- 决定系数：\( R^2 = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2} = 0.934 \)
+- 均方误差：\\( \text{MSE} = \frac{1}{n}\sum_{i=1}^n(y_i - \hat{y}_i)^2 \\)
+- 平均绝对误差：\\( \text{MAE} = \frac{1}{n}\sum_{i=1}^n|y_i - \hat{y}_i| \\)
+- 决定系数：\\( R^2 = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2} = 0.934 \\)
 
 该结果表明模型解释了93.4%的房价方差。
 
@@ -551,24 +551,24 @@ print(f"MSE均值: {-cv_scores.mean():.2f}, 标准差: {cv_scores.std():.2f}")
 
 **缺失值处理**：SVR不能直接处理缺失值，需在预处理阶段完成填充或删除。
 
-**目标变量变换**：当目标变量分布高度偏斜时，可考虑对数变换 \( \tilde{y} = \ln(y + 1) \)，预测后需逆变换。
+**目标变量变换**：当目标变量分布高度偏斜时，可考虑对数变换 \\( \tilde{y} = \ln(y + 1) \\)，预测后需逆变换。
 
 ### 计算复杂度
 
 | 操作 | 时间复杂度 | 空间复杂度 |
 |------|-----------|-----------|
-| 训练 | \( O(n^2 \cdot d) \) ~ \( O(n^3) \) | \( O(n^2) \) |
-| 预测 | \( O(n_{SV} \cdot d) \) | \( O(n_{SV}) \) |
+| 训练 | \\( O(n^2 \cdot d) \\) ~ \\( O(n^3) \\) | \\( O(n^2) \\) |
+| 预测 | \\( O(n_{SV} \cdot d) \\) | \\( O(n_{SV}) \\) |
 
-其中 \( n \) 为样本量，\( d \) 为特征维度，\( n_{SV} \) 为支持向量数量。当 \( n > 10^4 \) 时，核矩阵存储变得不可行。
+其中 \\( n \\) 为样本量，\\( d \\) 为特征维度，\\( n_{SV} \\) 为支持向量数量。当 \\( n > 10^4 \\) 时，核矩阵存储变得不可行。
 
 ### 适用场景
 
-SVR适合以下场景：中小规模数据集（\( n < 10000 \)）、高维特征空间、含噪声数据（ε-管道提供天然容忍）、需要理论保障的建模任务。
+SVR适合以下场景：中小规模数据集（\\( n < 10000 \\)）、高维特征空间、含噪声数据（ε-管道提供天然容忍）、需要理论保障的建模任务。
 
 ### 主要局限性
 
-1. **样本量限制**：当 \( n > 10^4 \) 时计算困难，可使用`LinearSVR`或Nystrom近似
+1. **样本量限制**：当 \\( n > 10^4 \\) 时计算困难，可使用`LinearSVR`或Nystrom近似
 2. **参数敏感性**：不当参数导致欠拟合或过拟合，必须系统调参
 3. **多输出回归**：标准SVR只支持单输出，需用`MultiOutputRegressor`包装
 4. **可解释性不足**：非线性SVR难以直观解释，需结合SHAP等工具

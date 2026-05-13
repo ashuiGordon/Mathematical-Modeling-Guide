@@ -8,19 +8,19 @@
 
 集成学习的有效性建立在以下理论基础之上：
 
-**Condorcet陪审团定理**：假设每个分类器独立地以概率 \( p > 0.5 \) 做出正确判断，则 \( T \) 个分类器通过多数投票的正确率为：
+**Condorcet陪审团定理**：假设每个分类器独立地以概率 \\( p > 0.5 \\) 做出正确判断，则 \\( T \\) 个分类器通过多数投票的正确率为：
 
-\[
+\\[
 P(\text{正确}) = \sum_{k=\lceil T/2 \rceil}^{T} \binom{T}{k} p^k (1-p)^{T-k}
-\]
+\\]
 
-当 \( T \to \infty \) 时，\( P(\text{正确}) \to 1 \)。
+当 \\( T \to \infty \\) 时，\\( P(\text{正确}) \to 1 \\)。
 
 **偏差-方差分解**：对于回归问题，期望误差可以分解为：
 
-\[
+\\[
 E[(f(x) - y)^2] = \text{Bias}^2 + \text{Variance} + \text{Noise}
-\]
+\\]
 
 不同的集成策略通过降低偏差或方差来减小总误差：
 - **Bagging**：主要降低方差
@@ -46,25 +46,25 @@ E[(f(x) - y)^2] = \text{Bias}^2 + \text{Variance} + \text{Noise}
 
 Bagging（Bootstrap Aggregating）由Breiman于1996年提出，其核心步骤：
 
-给定训练集 \( D = \{(x_1, y_1), \ldots, (x_n, y_n)\} \)：
+给定训练集 \\( D = \{(x_1, y_1), \ldots, (x_n, y_n)\} \\)：
 
-1. 对 \( t = 1, 2, \ldots, T \)：
-   - 从 \( D \) 中有放回地随机抽取 \( n \) 个样本得到 \( D_t \)
-   - 在 \( D_t \) 上训练基学习器 \( h_t \)
+1. 对 \\( t = 1, 2, \ldots, T \\)：
+   - 从 \\( D \\) 中有放回地随机抽取 \\( n \\) 个样本得到 \\( D_t \\)
+   - 在 \\( D_t \\) 上训练基学习器 \\( h_t \\)
 
 2. 输出集成预测：
-   - 分类：\( H(x) = \arg\max_y \sum_{t=1}^T \mathbb{I}(h_t(x) = y) \)
-   - 回归：\( H(x) = \frac{1}{T}\sum_{t=1}^T h_t(x) \)
+   - 分类：\\( H(x) = \arg\max_y \sum_{t=1}^T \mathbb{I}(h_t(x) = y) \\)
+   - 回归：\\( H(x) = \frac{1}{T}\sum_{t=1}^T h_t(x) \\)
 
 ### 方差减少分析
 
-若基学习器的方差为 \( \sigma^2 \)，两两之间的相关系数为 \( \rho \)，则集成后的方差为：
+若基学习器的方差为 \\( \sigma^2 \\)，两两之间的相关系数为 \\( \rho \\)，则集成后的方差为：
 
-\[
+\\[
 \text{Var}\left(\frac{1}{T}\sum_{t=1}^T h_t\right) = \frac{\rho \sigma^2 (T-1) + \sigma^2}{T} = \rho\sigma^2 + \frac{(1-\rho)\sigma^2}{T}
-\]
+\\]
 
-当 \( T \to \infty \) 时，方差趋近于 \( \rho\sigma^2 \)。因此，降低基学习器之间的相关性是Bagging成功的关键。
+当 \\( T \to \infty \\) 时，方差趋近于 \\( \rho\sigma^2 \\)。因此，降低基学习器之间的相关性是Bagging成功的关键。
 
 ### Python实现
 
@@ -101,45 +101,45 @@ Boosting是一族将弱学习器提升为强学习器的方法。其核心思想
 
 AdaBoost（Adaptive Boosting）由Freund和Schapire于1995年提出。
 
-输入：训练集 \( D = \{(x_i, y_i)\}_{i=1}^n \)，其中 \( y_i \in \{-1, +1\} \)
+输入：训练集 \\( D = \{(x_i, y_i)\}_{i=1}^n \\)，其中 \\( y_i \in \{-1, +1\} \\)
 
-初始化样本权重：\( w_1(i) = \frac{1}{n} \)，对所有 \( i = 1, \ldots, n \)
+初始化样本权重：\\( w_1(i) = \frac{1}{n} \\)，对所有 \\( i = 1, \ldots, n \\)
 
-对 \( t = 1, 2, \ldots, T \)：
+对 \\( t = 1, 2, \ldots, T \\)：
 
-1. 使用权重分布 \( w_t \) 训练基学习器 \( h_t(x) \)
+1. 使用权重分布 \\( w_t \\) 训练基学习器 \\( h_t(x) \\)
 
 2. 计算加权误差率：
-\[
+\\[
 \epsilon_t = \sum_{i=1}^n w_t(i) \cdot \mathbb{I}(h_t(x_i) \neq y_i)
-\]
+\\]
 
 3. 计算学习器权重：
-\[
+\\[
 \alpha_t = \frac{1}{2} \ln\frac{1 - \epsilon_t}{\epsilon_t}
-\]
+\\]
 
 4. 更新样本权重：
-\[
+\\[
 w_{t+1}(i) = \frac{w_t(i) \cdot \exp(-\alpha_t y_i h_t(x_i))}{Z_t}
-\]
-其中 \( Z_t \) 是归一化常数。
+\\]
+其中 \\( Z_t \\) 是归一化常数。
 
-输出：\( H(x) = \text{sign}\left(\sum_{t=1}^T \alpha_t h_t(x)\right) \)
+输出：\\( H(x) = \text{sign}\left(\sum_{t=1}^T \alpha_t h_t(x)\right) \\)
 
 #### 理论分析
 
 AdaBoost的训练误差上界：
 
-\[
+\\[
 \frac{1}{n}\sum_{i=1}^n \mathbb{I}(H(x_i) \neq y_i) \leq \prod_{t=1}^T Z_t = \prod_{t=1}^T 2\sqrt{\epsilon_t(1-\epsilon_t)}
-\]
+\\]
 
-若每个基学习器的误差率 \( \epsilon_t \leq \frac{1}{2} - \gamma \)，则：
+若每个基学习器的误差率 \\( \epsilon_t \leq \frac{1}{2} - \gamma \\)，则：
 
-\[
+\\[
 \prod_{t=1}^T Z_t \leq \exp(-2\gamma^2 T)
-\]
+\\]
 
 即训练误差以指数速率下降。
 
@@ -168,34 +168,34 @@ print(f"AdaBoost准确率: {ada_model.score(X_test, y_test):.4f}")
 
 GBDT（Gradient Boosting Decision Tree）由Friedman于2001年提出，将Boosting问题视为函数空间中的梯度下降。
 
-对于损失函数 \( L(y, F(x)) \)，GBDT在每一步拟合负梯度（伪残差）：
+对于损失函数 \\( L(y, F(x)) \\)，GBDT在每一步拟合负梯度（伪残差）：
 
-\[
+\\[
 r_{ti} = -\left[\frac{\partial L(y_i, F(x_i))}{\partial F(x_i)}\right]_{F=F_{t-1}}
-\]
+\\]
 
 算法流程：
 
-1. 初始化：\( F_0(x) = \arg\min_\gamma \sum_{i=1}^n L(y_i, \gamma) \)
+1. 初始化：\\( F_0(x) = \arg\min_\gamma \sum_{i=1}^n L(y_i, \gamma) \\)
 
-2. 对 \( t = 1, 2, \ldots, T \)：
-   - 计算伪残差：\( r_{ti} = -\frac{\partial L(y_i, F_{t-1}(x_i))}{\partial F_{t-1}(x_i)} \)
-   - 对伪残差拟合决策树 \( h_t(x) \)
-   - 通过线搜索确定步长：\( \rho_t = \arg\min_\rho \sum_{i=1}^n L(y_i, F_{t-1}(x_i) + \rho h_t(x_i)) \)
-   - 更新模型：\( F_t(x) = F_{t-1}(x) + \eta \cdot \rho_t h_t(x) \)
+2. 对 \\( t = 1, 2, \ldots, T \\)：
+   - 计算伪残差：\\( r_{ti} = -\frac{\partial L(y_i, F_{t-1}(x_i))}{\partial F_{t-1}(x_i)} \\)
+   - 对伪残差拟合决策树 \\( h_t(x) \\)
+   - 通过线搜索确定步长：\\( \rho_t = \arg\min_\rho \sum_{i=1}^n L(y_i, F_{t-1}(x_i) + \rho h_t(x_i)) \\)
+   - 更新模型：\\( F_t(x) = F_{t-1}(x) + \eta \cdot \rho_t h_t(x) \\)
 
-3. 输出：\( F_T(x) \)
+3. 输出：\\( F_T(x) \\)
 
-其中 \( \eta \) 为学习率（收缩系数）。
+其中 \\( \eta \\) 为学习率（收缩系数）。
 
 #### 常用损失函数
 
 | 任务类型 | 损失函数 | 负梯度 |
 |----------|----------|--------|
-| 回归（平方损失） | \( \frac{1}{2}(y-F)^2 \) | \( y - F \) |
-| 回归（绝对损失） | \( |y-F| \) | \( \text{sign}(y-F) \) |
+| 回归（平方损失） | \\( \frac{1}{2}(y-F)^2 \\) | \\( y - F \\) |
+| 回归（绝对损失） | \\( |y-F| \\) | \\( \text{sign}(y-F) \\) |
 | 回归（Huber损失） | 混合 | 混合 |
-| 分类（对数损失） | \( \log(1+e^{-yF}) \) | \( \frac{y}{1+e^{yF}} \) |
+| 分类（对数损失） | \\( \log(1+e^{-yF}) \\) | \\( \frac{y}{1+e^{yF}} \\) |
 
 #### Python实现
 
@@ -225,26 +225,26 @@ print(f"GBDT准确率: {gbdt_model.score(X_test, y_test):.4f}")
 XGBoost（eXtreme Gradient Boosting）由陈天奇于2016年提出，在GBDT基础上做了多项优化：
 
 1. **正则化目标函数**：
-\[
+\\[
 \text{Obj}^{(t)} = \sum_{i=1}^n L(y_i, \hat{y}_i^{(t-1)} + f_t(x_i)) + \Omega(f_t)
-\]
-其中正则化项 \( \Omega(f_t) = \gamma T + \frac{1}{2}\lambda\sum_{j=1}^T w_j^2 \)，\( T \) 为叶节点数，\( w_j \) 为叶节点权重。
+\\]
+其中正则化项 \\( \Omega(f_t) = \gamma T + \frac{1}{2}\lambda\sum_{j=1}^T w_j^2 \\)，\\( T \\) 为叶节点数，\\( w_j \\) 为叶节点权重。
 
 2. **二阶泰勒展开**：
-\[
+\\[
 \text{Obj}^{(t)} \approx \sum_{i=1}^n \left[g_i f_t(x_i) + \frac{1}{2}h_i f_t^2(x_i)\right] + \Omega(f_t)
-\]
-其中 \( g_i = \partial_{\hat{y}^{(t-1)}} L(y_i, \hat{y}^{(t-1)}) \)，\( h_i = \partial^2_{\hat{y}^{(t-1)}} L(y_i, \hat{y}^{(t-1)}) \)。
+\\]
+其中 \\( g_i = \partial_{\hat{y}^{(t-1)}} L(y_i, \hat{y}^{(t-1)}) \\)，\\( h_i = \partial^2_{\hat{y}^{(t-1)}} L(y_i, \hat{y}^{(t-1)}) \\)。
 
 3. **最优叶节点权重**：
-\[
+\\[
 w_j^* = -\frac{\sum_{i \in I_j} g_i}{\sum_{i \in I_j} h_i + \lambda}
-\]
+\\]
 
 4. **分裂增益**：
-\[
+\\[
 \text{Gain} = \frac{1}{2}\left[\frac{(\sum_{i \in I_L} g_i)^2}{\sum_{i \in I_L} h_i + \lambda} + \frac{(\sum_{i \in I_R} g_i)^2}{\sum_{i \in I_R} h_i + \lambda} - \frac{(\sum_{i \in I} g_i)^2}{\sum_{i \in I} h_i + \lambda}\right] - \gamma
-\]
+\\]
 
 #### 工程优化
 
@@ -304,8 +304,8 @@ xgb.plot_importance(xgb_model, max_num_features=10)
 LightGBM由微软于2017年发布，主要创新包括：
 
 1. **基于直方图的分裂算法（Histogram-based）**：
-   - 将连续特征离散化为 \( k \) 个箱（bins）
-   - 时间复杂度从 \( O(n \cdot p) \) 降为 \( O(k \cdot p) \)
+   - 将连续特征离散化为 \\( k \\) 个箱（bins）
+   - 时间复杂度从 \\( O(n \cdot p) \\) 降为 \\( O(k \cdot p) \\)
    - 内存占用大幅减少
 
 2. **带深度限制的叶子优先生长策略（Leaf-wise）**：
@@ -369,19 +369,19 @@ Stacking（Stacked Generalization）由Wolpert于1992年提出，其核心思想
 
 为避免过拟合，Stacking通常采用K折交叉验证生成元特征：
 
-1. 将训练集 \( D \) 分为 \( K \) 折
-2. 对每个基学习器 \( h_m \)（\( m = 1, \ldots, M \)）：
-   - 对每折 \( k \)：
-     - 用除第 \( k \) 折外的数据训练 \( h_m \)
-     - 对第 \( k \) 折数据做预测，得到元特征
-3. 拼接所有折的预测，得到完整的元特征矩阵 \( Z \in \mathbb{R}^{n \times M} \)
-4. 用 \( (Z, y) \) 训练元学习器 \( g \)
+1. 将训练集 \\( D \\) 分为 \\( K \\) 折
+2. 对每个基学习器 \\( h_m \\)（\\( m = 1, \ldots, M \\)）：
+   - 对每折 \\( k \\)：
+     - 用除第 \\( k \\) 折外的数据训练 \\( h_m \\)
+     - 对第 \\( k \\) 折数据做预测，得到元特征
+3. 拼接所有折的预测，得到完整的元特征矩阵 \\( Z \in \mathbb{R}^{n \times M} \\)
+4. 用 \\( (Z, y) \\) 训练元学习器 \\( g \\)
 
 最终预测：
 
-\[
+\\[
 H(x) = g(h_1(x), h_2(x), \ldots, h_M(x))
-\]
+\\]
 
 ### Python实现
 
@@ -554,8 +554,8 @@ def plot_model_comparison(names, r2_scores, rmse_scores):
 
 2. **学习率与迭代次数的权衡**：
    - 较小的学习率需要更多的迭代次数
-   - 通常 \( \eta \in [0.01, 0.3] \)
-   - 经验法则：\( \eta \times T \approx \text{const} \)
+   - 通常 \\( \eta \in [0.01, 0.3] \\)
+   - 经验法则：\\( \eta \times T \approx \text{const} \\)
 
 3. **特征工程**：
    - 树模型对特征尺度不敏感，无需标准化

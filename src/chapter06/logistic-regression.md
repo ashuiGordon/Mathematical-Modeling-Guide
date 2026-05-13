@@ -1,6 +1,6 @@
 # Logistic回归
 
-> Logistic回归是一种广义线性模型，虽然名称中包含"回归"，但它本质上是一种分类方法。通过将线性回归的输出映射到 \( (0, 1) \) 区间，Logistic回归能够对离散类别进行概率预测，是数学建模竞赛和实际工程中最常用的分类算法之一。
+> Logistic回归是一种广义线性模型，虽然名称中包含"回归"，但它本质上是一种分类方法。通过将线性回归的输出映射到 \\( (0, 1) \\) 区间，Logistic回归能够对离散类别进行概率预测，是数学建模竞赛和实际工程中最常用的分类算法之一。
 
 ---
 
@@ -8,42 +8,42 @@
 
 ### 基本思想
 
-> 二分类问题中，响应变量 \( y \in \{0, 1\} \)。Logistic回归的核心思想是：找到一个线性函数，通过非线性变换将其输出映射为类别概率。
+> 二分类问题中，响应变量 \\( y \in \{0, 1\} \\)。Logistic回归的核心思想是：找到一个线性函数，通过非线性变换将其输出映射为类别概率。
 
-设输入特征向量为 \( \mathbf{x} = (x_1, x_2, \ldots, x_p)^T \)，线性组合为：
+设输入特征向量为 \\( \mathbf{x} = (x_1, x_2, \ldots, x_p)^T \\)，线性组合为：
 
-\[
+\\[
 z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = \boldsymbol{\beta}^T \mathbf{x}
-\]
+\\]
 
-其中 \( \beta_0 \) 为截距项，\( \beta_1, \beta_2, \ldots, \beta_p \) 为回归系数。
+其中 \\( \beta_0 \\) 为截距项，\\( \beta_1, \beta_2, \ldots, \beta_p \\) 为回归系数。
 
 ### Sigmoid函数
 
-> Sigmoid函数是Logistic回归的激活函数，它将实数域映射到 \( (0, 1) \) 区间，具有良好的数学性质。
+> Sigmoid函数是Logistic回归的激活函数，它将实数域映射到 \\( (0, 1) \\) 区间，具有良好的数学性质。
 
 Sigmoid函数定义为：
 
-\[
+\\[
 \sigma(z) = \frac{1}{1 + e^{-z}}
-\]
+\\]
 
 其主要性质包括：
 
-- 值域为 \( (0, 1) \)，适合表示概率
-- 关于点 \( (0, 0.5) \) 中心对称：\( \sigma(-z) = 1 - \sigma(z) \)
-- 导数形式简洁：\( \sigma'(z) = \sigma(z)(1 - \sigma(z)) \)
-- 当 \( z \to +\infty \) 时，\( \sigma(z) \to 1 \)；当 \( z \to -\infty \) 时，\( \sigma(z) \to 0 \)
+- 值域为 \\( (0, 1) \\)，适合表示概率
+- 关于点 \\( (0, 0.5) \\) 中心对称：\\( \sigma(-z) = 1 - \sigma(z) \\)
+- 导数形式简洁：\\( \sigma'(z) = \sigma(z)(1 - \sigma(z)) \\)
+- 当 \\( z \to +\infty \\) 时，\\( \sigma(z) \to 1 \\)；当 \\( z \to -\infty \\) 时，\\( \sigma(z) \to 0 \\)
 
 因此，Logistic回归模型可以写为：
 
-\[
+\\[
 P(y = 1 \mid \mathbf{x}) = \sigma(\boldsymbol{\beta}^T \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
-\]
+\\]
 
-\[
+\\[
 P(y = 0 \mid \mathbf{x}) = 1 - \sigma(\boldsymbol{\beta}^T \mathbf{x}) = \frac{e^{-\boldsymbol{\beta}^T \mathbf{x}}}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
-\]
+\\]
 
 ### 对数几率（Log-Odds）
 
@@ -51,39 +51,39 @@ P(y = 0 \mid \mathbf{x}) = 1 - \sigma(\boldsymbol{\beta}^T \mathbf{x}) = \frac{e
 
 定义几率（Odds）为事件发生概率与不发生概率之比：
 
-\[
+\\[
 \text{Odds} = \frac{P(y=1 \mid \mathbf{x})}{P(y=0 \mid \mathbf{x})} = \frac{P(y=1 \mid \mathbf{x})}{1 - P(y=1 \mid \mathbf{x})}
-\]
+\\]
 
 对几率取对数，得到对数几率（Logit）：
 
-\[
+\\[
 \text{logit}(p) = \ln \frac{p}{1-p} = \boldsymbol{\beta}^T \mathbf{x} = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p
-\]
+\\]
 
 这说明Logistic回归实质上是用线性模型来拟合对数几率，因此也被称为"对数几率回归"。
 
-**系数的解释**：\( \beta_j \) 表示当 \( x_j \) 增加一个单位时，对数几率增加 \( \beta_j \)，即几率变为原来的 \( e^{\beta_j} \) 倍。
+**系数的解释**：\\( \beta_j \\) 表示当 \\( x_j \\) 增加一个单位时，对数几率增加 \\( \beta_j \\)，即几率变为原来的 \\( e^{\beta_j} \\) 倍。
 
 ### 决策边界
 
 > 决策边界是将特征空间划分为不同类别区域的超平面，Logistic回归的决策边界是线性的。
 
-通常取阈值 \( 0.5 \) 作为分类标准：
+通常取阈值 \\( 0.5 \\) 作为分类标准：
 
-\[
+\\[
 \hat{y} = \begin{cases} 1, & \text{if } P(y=1 \mid \mathbf{x}) \geq 0.5 \\ 0, & \text{if } P(y=1 \mid \mathbf{x}) < 0.5 \end{cases}
-\]
+\\]
 
-由于 \( \sigma(z) = 0.5 \) 当且仅当 \( z = 0 \)，决策边界方程为：
+由于 \\( \sigma(z) = 0.5 \\) 当且仅当 \\( z = 0 \\)，决策边界方程为：
 
-\[
+\\[
 \boldsymbol{\beta}^T \mathbf{x} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
-\]
+\\]
 
 在二维特征空间中，决策边界是一条直线；在高维空间中，决策边界是一个超平面。
 
-> 注意：阈值 \( 0.5 \) 并非唯一选择。在不平衡数据或特殊业务场景中，可以根据需求调整阈值以优化召回率或精确率。
+> 注意：阈值 \\( 0.5 \\) 并非唯一选择。在不平衡数据或特殊业务场景中，可以根据需求调整阈值以优化召回率或精确率。
 
 ---
 
@@ -93,49 +93,49 @@ P(y = 0 \mid \mathbf{x}) = 1 - \sigma(\boldsymbol{\beta}^T \mathbf{x}) = \frac{e
 
 > 极大似然估计（MLE）是Logistic回归最核心的参数估计方法，其目标是找到使观测数据出现概率最大的参数值。
 
-设有 \( n \) 个独立样本 \( \{(\mathbf{x}_i, y_i)\}_{i=1}^n \)，其中 \( y_i \in \{0, 1\} \)。
+设有 \\( n \\) 个独立样本 \\( \{(\mathbf{x}_i, y_i)\}_{i=1}^n \\)，其中 \\( y_i \in \{0, 1\} \\)。
 
 单个样本的似然为：
 
-\[
+\\[
 P(y_i \mid \mathbf{x}_i; \boldsymbol{\beta}) = [\sigma(\boldsymbol{\beta}^T \mathbf{x}_i)]^{y_i} [1 - \sigma(\boldsymbol{\beta}^T \mathbf{x}_i)]^{1 - y_i}
-\]
+\\]
 
 全体样本的似然函数为：
 
-\[
+\\[
 L(\boldsymbol{\beta}) = \prod_{i=1}^n [\sigma(\boldsymbol{\beta}^T \mathbf{x}_i)]^{y_i} [1 - \sigma(\boldsymbol{\beta}^T \mathbf{x}_i)]^{1 - y_i}
-\]
+\\]
 
 取对数得到对数似然函数：
 
-\[
+\\[
 \ell(\boldsymbol{\beta}) = \sum_{i=1}^n \left[ y_i \ln \sigma(\boldsymbol{\beta}^T \mathbf{x}_i) + (1 - y_i) \ln(1 - \sigma(\boldsymbol{\beta}^T \mathbf{x}_i)) \right]
-\]
+\\]
 
-记 \( p_i = \sigma(\boldsymbol{\beta}^T \mathbf{x}_i) \)，最大化对数似然等价于最小化交叉熵损失：
+记 \\( p_i = \sigma(\boldsymbol{\beta}^T \mathbf{x}_i) \\)，最大化对数似然等价于最小化交叉熵损失：
 
-\[
+\\[
 J(\boldsymbol{\beta}) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \ln p_i + (1 - y_i) \ln(1 - p_i) \right]
-\]
+\\]
 
 ### 梯度下降法
 
 > 由于Logistic回归的对数似然函数没有解析解，需要使用迭代优化方法。梯度下降是最基础的优化算法。
 
-损失函数 \( J(\boldsymbol{\beta}) \) 的梯度为：
+损失函数 \\( J(\boldsymbol{\beta}) \\) 的梯度为：
 
-\[
+\\[
 \nabla J(\boldsymbol{\beta}) = \frac{1}{n} \sum_{i=1}^n (p_i - y_i) \mathbf{x}_i
-\]
+\\]
 
 梯度下降的参数更新规则：
 
-\[
+\\[
 \boldsymbol{\beta}^{(t+1)} = \boldsymbol{\beta}^{(t)} - \alpha \nabla J(\boldsymbol{\beta}^{(t)})
-\]
+\\]
 
-其中 \( \alpha > 0 \) 为学习率。
+其中 \\( \alpha > 0 \\) 为学习率。
 
 **常用优化算法**：
 
@@ -151,15 +151,15 @@ J(\boldsymbol{\beta}) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \ln p_i + (1 - y_i)
 
 对数似然的Hessian矩阵为：
 
-\[
+\\[
 H = -\sum_{i=1}^n p_i(1 - p_i) \mathbf{x}_i \mathbf{x}_i^T = -\mathbf{X}^T \mathbf{W} \mathbf{X}
-\]
+\\]
 
-其中 \( \mathbf{W} = \text{diag}(p_1(1-p_1), \ldots, p_n(1-p_n)) \)。牛顿法更新公式：
+其中 \\( \mathbf{W} = \text{diag}(p_1(1-p_1), \ldots, p_n(1-p_n)) \\)。牛顿法更新公式：
 
-\[
+\\[
 \boldsymbol{\beta}^{(t+1)} = \boldsymbol{\beta}^{(t)} + (\mathbf{X}^T \mathbf{W} \mathbf{X})^{-1} \mathbf{X}^T (\mathbf{y} - \mathbf{p})
-\]
+\\]
 
 该方法也被称为迭代加权最小二乘（IRLS），通常在5-10次迭代内收敛。
 
@@ -167,34 +167,34 @@ H = -\sum_{i=1}^n p_i(1 - p_i) \mathbf{x}_i \mathbf{x}_i^T = -\mathbf{X}^T \math
 
 ## 多分类扩展：Softmax回归
 
-> 当响应变量有 \( K > 2 \) 个类别时，需要将二分类Logistic回归扩展为多分类模型，最自然的扩展方式是Softmax回归。
+> 当响应变量有 \\( K > 2 \\) 个类别时，需要将二分类Logistic回归扩展为多分类模型，最自然的扩展方式是Softmax回归。
 
 ### 模型定义
 
-设类别 \( k \in \{1, 2, \ldots, K\} \)，每个类别有独立的参数向量 \( \boldsymbol{\beta}_k \)。Softmax回归定义第 \( k \) 类的后验概率为：
+设类别 \\( k \in \{1, 2, \ldots, K\} \\)，每个类别有独立的参数向量 \\( \boldsymbol{\beta}_k \\)。Softmax回归定义第 \\( k \\) 类的后验概率为：
 
-\[
+\\[
 P(y = k \mid \mathbf{x}) = \frac{e^{\boldsymbol{\beta}_k^T \mathbf{x}}}{\sum_{j=1}^K e^{\boldsymbol{\beta}_j^T \mathbf{x}}}, \quad k = 1, 2, \ldots, K
-\]
+\\]
 
-性质：\( \sum_{k=1}^K P(y = k \mid \mathbf{x}) = 1 \)，当 \( K = 2 \) 时退化为标准Logistic回归。
+性质：\\( \sum_{k=1}^K P(y = k \mid \mathbf{x}) = 1 \\)，当 \\( K = 2 \\) 时退化为标准Logistic回归。
 
 ### 损失函数
 
 Softmax回归的交叉熵损失为：
 
-\[
+\\[
 J(\boldsymbol{\beta}_1, \ldots, \boldsymbol{\beta}_K) = -\frac{1}{n} \sum_{i=1}^n \sum_{k=1}^K \mathbb{1}(y_i = k) \ln P(y_i = k \mid \mathbf{x}_i)
-\]
+\\]
 
-其中 \( \mathbb{1}(\cdot) \) 为指示函数。
+其中 \\( \mathbb{1}(\cdot) \\) 为指示函数。
 
 ### 多分类策略比较
 
 | 策略 | 方法 | 模型数量 |
 |------|------|----------|
-| One-vs-Rest (OvR) | 每个类别训练一个二分类模型 | \( K \) 个 |
-| One-vs-One (OvO) | 每对类别训练一个模型 | \( K(K-1)/2 \) 个 |
+| One-vs-Rest (OvR) | 每个类别训练一个二分类模型 | \\( K \\) 个 |
+| One-vs-One (OvO) | 每对类别训练一个模型 | \\( K(K-1)/2 \\) 个 |
 | Softmax（多项式） | 统一建模所有类别 | 1个 |
 
 > sklearn中`LogisticRegression`的`multi_class`参数可选`'ovr'`或`'multinomial'`来指定策略。
@@ -207,19 +207,19 @@ J(\boldsymbol{\beta}_1, \ldots, \boldsymbol{\beta}_K) = -\frac{1}{n} \sum_{i=1}^
 
 ### L2正则化（Ridge）
 
-\[
+\\[
 J_{L2}(\boldsymbol{\beta}) = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \frac{\lambda}{2} \|\boldsymbol{\beta}\|_2^2 = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \frac{\lambda}{2} \sum_{j=1}^p \beta_j^2
-\]
+\\]
 
 - 效果：使所有系数趋向于较小的值，但不会精确为零
 - 适用：所有特征都可能相关的场景
-- sklearn中：`penalty='l2'`，正则化强度由 \( C = 1/\lambda \) 控制
+- sklearn中：`penalty='l2'`，正则化强度由 \\( C = 1/\lambda \\) 控制
 
 ### L1正则化（Lasso）
 
-\[
+\\[
 J_{L1}(\boldsymbol{\beta}) = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \lambda \|\boldsymbol{\beta}\|_1 = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \lambda \sum_{j=1}^p |\beta_j|
-\]
+\\]
 
 - 效果：使部分系数精确为零，具有特征选择功能
 - 适用：高维稀疏数据，需要自动特征选择
@@ -227,11 +227,11 @@ J_{L1}(\boldsymbol{\beta}) = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \lambda \|\
 
 ### 弹性网（Elastic Net）
 
-\[
+\\[
 J_{EN}(\boldsymbol{\beta}) = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \lambda \left[ \rho \|\boldsymbol{\beta}\|_1 + \frac{1 - \rho}{2} \|\boldsymbol{\beta}\|_2^2 \right]
-\]
+\\]
 
-其中 \( \rho \in [0, 1] \) 控制L1和L2的比例。sklearn中通过`penalty='elasticnet'`和`l1_ratio`参数设置。
+其中 \\( \rho \in [0, 1] \\) 控制L1和L2的比例。sklearn中通过`penalty='elasticnet'`和`l1_ratio`参数设置。
 
 ### 正则化强度选择
 
@@ -247,7 +247,7 @@ J_{EN}(\boldsymbol{\beta}) = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \lambda \le
 
 某银行收集了客户的两项特征数据，用于预测贷款是否违约：
 
-| 客户编号 | 收入 \( x_1 \)（万元） | 负债比 \( x_2 \) | 是否违约 \( y \) |
+| 客户编号 | 收入 \\( x_1 \\)（万元） | 负债比 \\( x_2 \\) | 是否违约 \\( y \\) |
 |----------|------------------------|-------------------|------------------|
 | 1 | 4.0 | 0.3 | 0 |
 | 2 | 3.5 | 0.6 | 0 |
@@ -260,50 +260,50 @@ J_{EN}(\boldsymbol{\beta}) = -\frac{1}{n} \ell(\boldsymbol{\beta}) + \lambda \le
 
 设模型为：
 
-\[
+\\[
 P(y = 1 \mid x_1, x_2) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2)}}
-\]
+\\]
 
 ### 极大似然估计过程
 
 对数似然函数：
 
-\[
+\\[
 \ell(\beta_0, \beta_1, \beta_2) = \sum_{i=1}^6 \left[ y_i \ln p_i + (1 - y_i) \ln(1 - p_i) \right]
-\]
+\\]
 
 经过牛顿法迭代优化，得到参数估计值：
 
-\[
+\\[
 \hat{\beta}_0 = 1.2, \quad \hat{\beta}_1 = -1.5, \quad \hat{\beta}_2 = 3.8
-\]
+\\]
 
 ### 模型解释
 
-- \( \hat{\beta}_1 = -1.5 < 0 \)：收入每增加1万元，违约的对数几率减少1.5，即几率变为原来的 \( e^{-1.5} \approx 0.22 \) 倍
-- \( \hat{\beta}_2 = 3.8 > 0 \)：负债比每增加0.1，违约的对数几率增加0.38，即几率变为原来的 \( e^{0.38} \approx 1.46 \) 倍
+- \\( \hat{\beta}_1 = -1.5 < 0 \\)：收入每增加1万元，违约的对数几率减少1.5，即几率变为原来的 \\( e^{-1.5} \approx 0.22 \\) 倍
+- \\( \hat{\beta}_2 = 3.8 > 0 \\)：负债比每增加0.1，违约的对数几率增加0.38，即几率变为原来的 \\( e^{0.38} \approx 1.46 \\) 倍
 
 ### 预测计算
 
-对新客户 \( (x_1 = 3.0, x_2 = 0.5) \)：
+对新客户 \\( (x_1 = 3.0, x_2 = 0.5) \\)：
 
-\[
+\\[
 z = 1.2 + (-1.5)(3.0) + 3.8(0.5) = 1.2 - 4.5 + 1.9 = -1.4
-\]
+\\]
 
-\[
+\\[
 P(y = 1) = \frac{1}{1 + e^{1.4}} = \frac{1}{1 + 4.055} \approx 0.198
-\]
+\\]
 
-由于 \( P(y=1) = 0.198 < 0.5 \)，预测该客户不会违约。
+由于 \\( P(y=1) = 0.198 < 0.5 \\)，预测该客户不会违约。
 
 ### 决策边界
 
-令 \( P(y=1) = 0.5 \)，即 \( z = 0 \)：
+令 \\( P(y=1) = 0.5 \\)，即 \\( z = 0 \\)：
 
-\[
+\\[
 1.2 - 1.5 x_1 + 3.8 x_2 = 0 \implies x_2 = \frac{1.5 x_1 - 1.2}{3.8} \approx 0.395 x_1 - 0.316
-\]
+\\]
 
 这是特征平面上的一条直线，将违约区域与非违约区域分开。
 
@@ -316,9 +316,9 @@ P(y = 1) = \frac{1}{1 + e^{1.4}} = \frac{1}{1 + 4.055} \approx 0.198
 | 实际不违约 | TN = 3 | FP = 0 |
 | 实际违约 | FN = 0 | TP = 3 |
 
-- 准确率：\( \text{Accuracy} = \frac{TP + TN}{n} = \frac{6}{6} = 100\% \)
-- 精确率：\( \text{Precision} = \frac{TP}{TP + FP} = \frac{3}{3} = 100\% \)
-- 召回率：\( \text{Recall} = \frac{TP}{TP + FN} = \frac{3}{3} = 100\% \)
+- 准确率：\\( \text{Accuracy} = \frac{TP + TN}{n} = \frac{6}{6} = 100\% \\)
+- 精确率：\\( \text{Precision} = \frac{TP}{TP + FP} = \frac{3}{3} = 100\% \\)
+- 召回率：\\( \text{Recall} = \frac{TP}{TP + FN} = \frac{3}{3} = 100\% \\)
 
 > 注意：训练集上的完美表现不代表泛化能力好，实际应用中需要在测试集上评估。
 

@@ -8,43 +8,43 @@
 
 ### 条件概率与全概率公式
 
-设样本空间 \(\Omega\) 的一个划分为 \(B_1, B_2, \ldots, B_k\)，即这些事件两两互斥且并集为全空间。对于任意事件 \(A\)，全概率公式为：
+设样本空间 \\(\Omega\\) 的一个划分为 \\(B_1, B_2, \ldots, B_k\\)，即这些事件两两互斥且并集为全空间。对于任意事件 \\(A\\)，全概率公式为：
 
-\[
+\\[
 P(A) = \sum_{i=1}^{k} P(A \mid B_i) P(B_i)
-\]
+\\]
 
 ### 贝叶斯定理
 
-在已知事件 \(A\) 发生的条件下，事件 \(B_i\) 发生的后验概率为：
+在已知事件 \\(A\\) 发生的条件下，事件 \\(B_i\\) 发生的后验概率为：
 
-\[
+\\[
 P(B_i \mid A) = \frac{P(A \mid B_i) P(B_i)}{\sum_{j=1}^{k} P(A \mid B_j) P(B_j)}
-\]
+\\]
 
 > 贝叶斯定理的核心思想是：后验概率正比于先验概率与似然函数的乘积。
 
 ### 判别分析中的贝叶斯公式
 
-在判别分析的框架下，设有 \(k\) 个总体 \(G_1, G_2, \ldots, G_k\)，各总体的先验概率为 \(q_i = P(G_i)\)，满足：
+在判别分析的框架下，设有 \\(k\\) 个总体 \\(G_1, G_2, \ldots, G_k\\)，各总体的先验概率为 \\(q_i = P(G_i)\\)，满足：
 
-\[
+\\[
 \sum_{i=1}^{k} q_i = 1, \quad q_i > 0
-\]
+\\]
 
-设各总体的概率密度函数为 \(f_i(\mathbf{x})\)，则对于观测样本 \(\mathbf{x}\)，其属于第 \(i\) 个总体的后验概率为：
+设各总体的概率密度函数为 \\(f_i(\mathbf{x})\\)，则对于观测样本 \\(\mathbf{x}\\)，其属于第 \\(i\\) 个总体的后验概率为：
 
-\[
+\\[
 P(G_i \mid \mathbf{x}) = \frac{f_i(\mathbf{x}) q_i}{\sum_{j=1}^{k} f_j(\mathbf{x}) q_j}
-\]
+\\]
 
 ### 先验概率的确定
 
-先验概率 \(q_i\) 的确定方法通常有：
+先验概率 \\(q_i\\) 的确定方法通常有：
 
 - 根据历史数据统计各类样本出现的频率
 - 根据专家经验主观给定
-- 在无先验信息时，假设各总体等概率，即 \(q_i = 1/k\)
+- 在无先验信息时，假设各总体等概率，即 \\(q_i = 1/k\\)
 
 ---
 
@@ -52,43 +52,43 @@ P(G_i \mid \mathbf{x}) = \frac{f_i(\mathbf{x}) q_i}{\sum_{j=1}^{k} f_j(\mathbf{x
 
 ### 误判概率的定义
 
-将属于总体 \(G_i\) 的样本误判为总体 \(G_j\)（\(j \neq i\)）的条件概率记为 \(P(j \mid i)\)。总误判概率为：
+将属于总体 \\(G_i\\) 的样本误判为总体 \\(G_j\\)（\\(j \neq i\\)）的条件概率记为 \\(P(j \mid i)\\)。总误判概率为：
 
-\[
+\\[
 P(\text{误判}) = \sum_{i=1}^{k} q_i \sum_{j \neq i} P(j \mid i)
-\]
+\\]
 
 ### 两总体情形的判别规则
 
-对于两个总体 \(G_1\) 和 \(G_2\) 的情形，最小误判率准则的判别规则为：
+对于两个总体 \\(G_1\\) 和 \\(G_2\\) 的情形，最小误判率准则的判别规则为：
 
-若后验概率 \(P(G_1 \mid \mathbf{x}) > P(G_2 \mid \mathbf{x})\)，则将 \(\mathbf{x}\) 判归 \(G_1\)；否则判归 \(G_2\)。
+若后验概率 \\(P(G_1 \mid \mathbf{x}) > P(G_2 \mid \mathbf{x})\\)，则将 \\(\mathbf{x}\\) 判归 \\(G_1\\)；否则判归 \\(G_2\\)。
 
 等价地，定义似然比：
 
-\[
+\\[
 \Lambda(\mathbf{x}) = \frac{f_1(\mathbf{x})}{f_2(\mathbf{x})}
-\]
+\\]
 
 判别规则可表示为：
 
-\[
+\\[
 \text{若} \quad \Lambda(\mathbf{x}) \geq \frac{q_2}{q_1}, \quad \text{则} \quad \mathbf{x} \in G_1; \quad \text{否则} \quad \mathbf{x} \in G_2
-\]
+\\]
 
 ### 多总体情形的判别规则
 
-对于 \(k\) 个总体的一般情形，最小误判率的Bayes判别规则为：
+对于 \\(k\\) 个总体的一般情形，最小误判率的Bayes判别规则为：
 
-\[
+\\[
 \text{若} \quad P(G_i \mid \mathbf{x}) = \max_{1 \leq j \leq k} P(G_j \mid \mathbf{x}), \quad \text{则判} \quad \mathbf{x} \in G_i
-\]
+\\]
 
 即将样本判归后验概率最大的那个总体。这等价于：
 
-\[
+\\[
 \text{若} \quad f_i(\mathbf{x}) q_i = \max_{1 \leq j \leq k} f_j(\mathbf{x}) q_j, \quad \text{则判} \quad \mathbf{x} \in G_i
-\]
+\\]
 
 > 当各总体先验概率相等时，最小误判率准则退化为最大似然判别准则。
 
@@ -98,23 +98,23 @@ P(\text{误判}) = \sum_{i=1}^{k} q_i \sum_{j \neq i} P(j \mid i)
 
 ### 损失函数的定义
 
-在实际问题中，不同类型的误判可能带来不同程度的损失。定义损失函数 \(L(j \mid i)\) 表示将属于 \(G_i\) 的样本误判为 \(G_j\) 所造成的损失，其中 \(L(i \mid i) = 0\)。
+在实际问题中，不同类型的误判可能带来不同程度的损失。定义损失函数 \\(L(j \mid i)\\) 表示将属于 \\(G_i\\) 的样本误判为 \\(G_j\\) 所造成的损失，其中 \\(L(i \mid i) = 0\\)。
 
 ### 条件期望损失
 
-将样本 \(\mathbf{x}\) 判归第 \(j\) 类时的条件期望损失（后验期望损失）为：
+将样本 \\(\mathbf{x}\\) 判归第 \\(j\\) 类时的条件期望损失（后验期望损失）为：
 
-\[
+\\[
 R(j \mid \mathbf{x}) = \sum_{i=1}^{k} L(j \mid i) P(G_i \mid \mathbf{x})
-\]
+\\]
 
 ### 最小损失判别规则
 
 最小损失准则的Bayes判别规则为：
 
-\[
+\\[
 \text{若} \quad R(m \mid \mathbf{x}) = \min_{1 \leq j \leq k} R(j \mid \mathbf{x}), \quad \text{则判} \quad \mathbf{x} \in G_m
-\]
+\\]
 
 即将样本判归使得条件期望损失最小的那个总体。
 
@@ -122,25 +122,25 @@ R(j \mid \mathbf{x}) = \sum_{i=1}^{k} L(j \mid i) P(G_i \mid \mathbf{x})
 
 对于两总体问题，设损失矩阵为：
 
-\[
+\\[
 \mathbf{L} = \begin{pmatrix} 0 & L(1 \mid 2) \\ L(2 \mid 1) & 0 \end{pmatrix}
-\]
+\\]
 
 判别规则变为：
 
-\[
+\\[
 \text{若} \quad \frac{f_1(\mathbf{x})}{f_2(\mathbf{x})} \geq \frac{L(1 \mid 2) \cdot q_2}{L(2 \mid 1) \cdot q_1}, \quad \text{则判} \quad \mathbf{x} \in G_1
-\]
+\\]
 
-> 当损失对称即 \(L(1 \mid 2) = L(2 \mid 1)\) 时，最小损失准则与最小误判率准则一致。
+> 当损失对称即 \\(L(1 \mid 2) = L(2 \mid 1)\\) 时，最小损失准则与最小误判率准则一致。
 
 ### 与最小误判率准则的关系
 
 当损失函数取0-1损失时，即：
 
-\[
+\\[
 L(j \mid i) = \begin{cases} 0, & j = i \\ 1, & j \neq i \end{cases}
-\]
+\\]
 
 最小损失准则退化为最小误判率准则。因此，最小误判率准则是最小损失准则的特例。
 
@@ -150,49 +150,49 @@ L(j \mid i) = \begin{cases} 0, & j = i \\ 1, & j \neq i \end{cases}
 
 ### 基本假设
 
-假设各总体 \(G_i\) 服从 \(p\) 维正态分布 \(N_p(\boldsymbol{\mu}_i, \boldsymbol{\Sigma}_i)\)，其概率密度函数为：
+假设各总体 \\(G_i\\) 服从 \\(p\\) 维正态分布 \\(N_p(\boldsymbol{\mu}_i, \boldsymbol{\Sigma}_i)\\)，其概率密度函数为：
 
-\[
+\\[
 f_i(\mathbf{x}) = \frac{1}{(2\pi)^{p/2} |\boldsymbol{\Sigma}_i|^{1/2}} \exp\left\{ -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu}_i)^T \boldsymbol{\Sigma}_i^{-1} (\mathbf{x} - \boldsymbol{\mu}_i) \right\}
-\]
+\\]
 
 ### 协方差矩阵相等的情形
 
-当 \(\boldsymbol{\Sigma}_1 = \boldsymbol{\Sigma}_2 = \boldsymbol{\Sigma}\) 时，两总体的判别函数简化为线性函数。定义判别函数：
+当 \\(\boldsymbol{\Sigma}_1 = \boldsymbol{\Sigma}_2 = \boldsymbol{\Sigma}\\) 时，两总体的判别函数简化为线性函数。定义判别函数：
 
-\[
+\\[
 W(\mathbf{x}) = (\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)^T \boldsymbol{\Sigma}^{-1} \mathbf{x} - \frac{1}{2} (\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2) + \ln \frac{q_1}{q_2}
-\]
+\\]
 
 判别规则为：
 
-\[
+\\[
 \text{若} \quad W(\mathbf{x}) \geq 0, \quad \text{则判} \quad \mathbf{x} \in G_1; \quad \text{否则} \quad \mathbf{x} \in G_2
-\]
+\\]
 
 > 协方差矩阵相等时，Bayes判别的判别界面是超平面，判别规则是线性的。
 
 ### 协方差矩阵不等的情形
 
-当 \(\boldsymbol{\Sigma}_1 \neq \boldsymbol{\Sigma}_2\) 时，判别函数为二次函数。定义：
+当 \\(\boldsymbol{\Sigma}_1 \neq \boldsymbol{\Sigma}_2\\) 时，判别函数为二次函数。定义：
 
-\[
+\\[
 d_i(\mathbf{x}) = -\frac{1}{2} \ln |\boldsymbol{\Sigma}_i| - \frac{1}{2} (\mathbf{x} - \boldsymbol{\mu}_i)^T \boldsymbol{\Sigma}_i^{-1} (\mathbf{x} - \boldsymbol{\mu}_i) + \ln q_i
-\]
+\\]
 
 判别规则为：
 
-\[
+\\[
 \text{若} \quad d_i(\mathbf{x}) = \max_{1 \leq j \leq k} d_j(\mathbf{x}), \quad \text{则判} \quad \mathbf{x} \in G_i
-\]
+\\]
 
 ### 参数估计
 
 实际应用中，总体参数通常未知，需要用样本估计：
 
-- 均值向量估计：\(\hat{\boldsymbol{\mu}}_i = \bar{\mathbf{x}}_i = \frac{1}{n_i} \sum_{l=1}^{n_i} \mathbf{x}_{il}\)
-- 协方差矩阵估计：\(\hat{\boldsymbol{\Sigma}}_i = \frac{1}{n_i - 1} \sum_{l=1}^{n_i} (\mathbf{x}_{il} - \bar{\mathbf{x}}_i)(\mathbf{x}_{il} - \bar{\mathbf{x}}_i)^T\)
-- 公共协方差矩阵的合并估计：\(\hat{\boldsymbol{\Sigma}} = \frac{1}{n - k} \sum_{i=1}^{k} (n_i - 1) \hat{\boldsymbol{\Sigma}}_i\)
+- 均值向量估计：\\(\hat{\boldsymbol{\mu}}_i = \bar{\mathbf{x}}_i = \frac{1}{n_i} \sum_{l=1}^{n_i} \mathbf{x}_{il}\\)
+- 协方差矩阵估计：\\(\hat{\boldsymbol{\Sigma}}_i = \frac{1}{n_i - 1} \sum_{l=1}^{n_i} (\mathbf{x}_{il} - \bar{\mathbf{x}}_i)(\mathbf{x}_{il} - \bar{\mathbf{x}}_i)^T\\)
+- 公共协方差矩阵的合并估计：\\(\hat{\boldsymbol{\Sigma}} = \frac{1}{n - k} \sum_{i=1}^{k} (n_i - 1) \hat{\boldsymbol{\Sigma}}_i\\)
 
 ---
 
@@ -202,9 +202,9 @@ d_i(\mathbf{x}) = -\frac{1}{2} \ln |\boldsymbol{\Sigma}_i| - \frac{1}{2} (\mathb
 
 朴素贝叶斯分类器在贝叶斯定理的基础上，引入一个重要的简化假设——特征条件独立性假设：
 
-\[
+\\[
 P(\mathbf{x} \mid G_i) = P(x_1, x_2, \ldots, x_p \mid G_i) = \prod_{l=1}^{p} P(x_l \mid G_i)
-\]
+\\]
 
 即给定类别标签后，各特征变量之间相互独立。
 
@@ -212,37 +212,37 @@ P(\mathbf{x} \mid G_i) = P(x_1, x_2, \ldots, x_p \mid G_i) = \prod_{l=1}^{p} P(x
 
 在条件独立性假设下，后验概率为：
 
-\[
+\\[
 P(G_i \mid \mathbf{x}) \propto q_i \prod_{l=1}^{p} P(x_l \mid G_i)
-\]
+\\]
 
 分类规则为：
 
-\[
+\\[
 \hat{y} = \arg\max_{i} \left[ \ln q_i + \sum_{l=1}^{p} \ln P(x_l \mid G_i) \right]
-\]
+\\]
 
 ### 不同类型特征的处理
 
 **连续特征（高斯朴素贝叶斯）：** 假设每个特征在各类别下服从正态分布：
 
-\[
+\\[
 P(x_l \mid G_i) = \frac{1}{\sqrt{2\pi} \sigma_{il}} \exp\left\{ -\frac{(x_l - \mu_{il})^2}{2\sigma_{il}^2} \right\}
-\]
+\\]
 
 **离散特征（多项式朴素贝叶斯）：** 使用频率估计条件概率：
 
-\[
+\\[
 P(x_l = v \mid G_i) = \frac{N_{il}(v) + \alpha}{N_i + \alpha V_l}
-\]
+\\]
 
-其中 \(\alpha\) 为Laplace平滑参数，\(V_l\) 为特征 \(x_l\) 的取值个数。
+其中 \\(\alpha\\) 为Laplace平滑参数，\\(V_l\\) 为特征 \\(x_l\\) 的取值个数。
 
 **二值特征（伯努利朴素贝叶斯）：** 特征只取0或1：
 
-\[
+\\[
 P(x_l \mid G_i) = p_{il}^{x_l} (1 - p_{il})^{1 - x_l}
-\]
+\\]
 
 ### 朴素贝叶斯的优缺点
 
@@ -265,123 +265,123 @@ P(x_l \mid G_i) = p_{il}^{x_l} (1 - p_{il})^{1 - x_l}
 
 ### 问题描述
 
-某医院对患者进行疾病诊断分类。已知有三类疾病 \(G_1, G_2, G_3\)，根据历史数据统计得各类疾病的先验概率分别为 \(q_1 = 0.5, q_2 = 0.3, q_3 = 0.2\)。检测两项指标 \(X_1, X_2\)，各类疾病的分布参数如下：
+某医院对患者进行疾病诊断分类。已知有三类疾病 \\(G_1, G_2, G_3\\)，根据历史数据统计得各类疾病的先验概率分别为 \\(q_1 = 0.5, q_2 = 0.3, q_3 = 0.2\\)。检测两项指标 \\(X_1, X_2\\)，各类疾病的分布参数如下：
 
-- \(G_1: \boldsymbol{\mu}_1 = (3, 4)^T\)
-- \(G_2: \boldsymbol{\mu}_2 = (6, 2)^T\)
-- \(G_3: \boldsymbol{\mu}_3 = (5, 6)^T\)
+- \\(G_1: \boldsymbol{\mu}_1 = (3, 4)^T\\)
+- \\(G_2: \boldsymbol{\mu}_2 = (6, 2)^T\\)
+- \\(G_3: \boldsymbol{\mu}_3 = (5, 6)^T\\)
 
 假设三个总体的协方差矩阵相同：
 
-\[
+\\[
 \boldsymbol{\Sigma} = \begin{pmatrix} 2 & 0.5 \\ 0.5 & 1.5 \end{pmatrix}
-\]
+\\]
 
-现有一新患者的检测结果为 \(\mathbf{x}_0 = (4, 3)^T\)，试用Bayes判别法确定该患者属于哪类疾病。
+现有一新患者的检测结果为 \\(\mathbf{x}_0 = (4, 3)^T\\)，试用Bayes判别法确定该患者属于哪类疾病。
 
 ### 计算过程
 
 **第一步：计算协方差矩阵的逆矩阵**
 
-\[
+\\[
 |\boldsymbol{\Sigma}| = 2 \times 1.5 - 0.5 \times 0.5 = 2.75
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\Sigma}^{-1} = \frac{1}{2.75} \begin{pmatrix} 1.5 & -0.5 \\ -0.5 & 2 \end{pmatrix} = \begin{pmatrix} 0.5455 & -0.1818 \\ -0.1818 & 0.7273 \end{pmatrix}
-\]
+\\]
 
 **第二步：计算各类的判别函数值**
 
 对于等协方差情形，判别函数为：
 
-\[
+\\[
 d_i(\mathbf{x}) = \boldsymbol{\mu}_i^T \boldsymbol{\Sigma}^{-1} \mathbf{x} - \frac{1}{2} \boldsymbol{\mu}_i^T \boldsymbol{\Sigma}^{-1} \boldsymbol{\mu}_i + \ln q_i
-\]
+\\]
 
-计算 \(d_1(\mathbf{x}_0)\)：
+计算 \\(d_1(\mathbf{x}_0)\\)：
 
-\[
+\\[
 \boldsymbol{\mu}_1^T \boldsymbol{\Sigma}^{-1} = (3, 4) \begin{pmatrix} 0.5455 & -0.1818 \\ -0.1818 & 0.7273 \end{pmatrix} = (0.9091, 2.3636)
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\mu}_1^T \boldsymbol{\Sigma}^{-1} \mathbf{x}_0 = 0.9091 \times 4 + 2.3636 \times 3 = 3.6364 + 7.0909 = 10.7273
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\mu}_1^T \boldsymbol{\Sigma}^{-1} \boldsymbol{\mu}_1 = 0.9091 \times 3 + 2.3636 \times 4 = 2.7273 + 9.4545 = 12.1818
-\]
+\\]
 
-\[
+\\[
 d_1(\mathbf{x}_0) = 10.7273 - \frac{1}{2} \times 12.1818 + \ln(0.5) = 10.7273 - 6.0909 - 0.6931 = 3.9433
-\]
+\\]
 
-计算 \(d_2(\mathbf{x}_0)\)：
+计算 \\(d_2(\mathbf{x}_0)\\)：
 
-\[
+\\[
 \boldsymbol{\mu}_2^T \boldsymbol{\Sigma}^{-1} = (6, 2) \begin{pmatrix} 0.5455 & -0.1818 \\ -0.1818 & 0.7273 \end{pmatrix} = (2.9091, 0.3636)
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\mu}_2^T \boldsymbol{\Sigma}^{-1} \mathbf{x}_0 = 2.9091 \times 4 + 0.3636 \times 3 = 11.6364 + 1.0909 = 12.7273
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\mu}_2^T \boldsymbol{\Sigma}^{-1} \boldsymbol{\mu}_2 = 2.9091 \times 6 + 0.3636 \times 2 = 17.4545 + 0.7273 = 18.1818
-\]
+\\]
 
-\[
+\\[
 d_2(\mathbf{x}_0) = 12.7273 - \frac{1}{2} \times 18.1818 + \ln(0.3) = 12.7273 - 9.0909 - 1.2040 = 2.4324
-\]
+\\]
 
-计算 \(d_3(\mathbf{x}_0)\)：
+计算 \\(d_3(\mathbf{x}_0)\\)：
 
-\[
+\\[
 \boldsymbol{\mu}_3^T \boldsymbol{\Sigma}^{-1} = (5, 6) \begin{pmatrix} 0.5455 & -0.1818 \\ -0.1818 & 0.7273 \end{pmatrix} = (1.6364, 3.4545)
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\mu}_3^T \boldsymbol{\Sigma}^{-1} \mathbf{x}_0 = 1.6364 \times 4 + 3.4545 \times 3 = 6.5455 + 10.3636 = 16.9091
-\]
+\\]
 
-\[
+\\[
 \boldsymbol{\mu}_3^T \boldsymbol{\Sigma}^{-1} \boldsymbol{\mu}_3 = 1.6364 \times 5 + 3.4545 \times 6 = 8.1818 + 20.7273 = 28.9091
-\]
+\\]
 
-\[
+\\[
 d_3(\mathbf{x}_0) = 16.9091 - \frac{1}{2} \times 28.9091 + \ln(0.2) = 16.9091 - 14.4545 - 1.6094 = 0.8451
-\]
+\\]
 
 **第三步：做出判别决策**
 
 比较三个判别函数值：
 
-\[
+\\[
 d_1(\mathbf{x}_0) = 3.9433 > d_2(\mathbf{x}_0) = 2.4324 > d_3(\mathbf{x}_0) = 0.8451
-\]
+\\]
 
-由于 \(d_1(\mathbf{x}_0)\) 最大，根据最小误判率的Bayes判别准则，判定该患者属于第一类疾病 \(G_1\)。
+由于 \\(d_1(\mathbf{x}_0)\\) 最大，根据最小误判率的Bayes判别准则，判定该患者属于第一类疾病 \\(G_1\\)。
 
 **第四步：计算后验概率**
 
 各类的后验概率为：
 
-\[
+\\[
 P(G_i \mid \mathbf{x}_0) = \frac{e^{d_i(\mathbf{x}_0)}}{\sum_{j=1}^{3} e^{d_j(\mathbf{x}_0)}}
-\]
+\\]
 
-\[
+\\[
 P(G_1 \mid \mathbf{x}_0) = \frac{e^{3.9433}}{e^{3.9433} + e^{2.4324} + e^{0.8451}} = \frac{51.58}{51.58 + 11.39 + 2.33} = \frac{51.58}{65.30} \approx 0.7899
-\]
+\\]
 
-\[
+\\[
 P(G_2 \mid \mathbf{x}_0) \approx \frac{11.39}{65.30} \approx 0.1744
-\]
+\\]
 
-\[
+\\[
 P(G_3 \mid \mathbf{x}_0) \approx \frac{2.33}{65.30} \approx 0.0357
-\]
+\\]
 
 > 该患者属于第一类疾病的后验概率约为78.99%，判别结果具有较高的可信度。
 
@@ -541,7 +541,7 @@ print(f"后验概率: P(G1|x)={post[0,0]:.4f}, "
 上述代码的主要输出包括：
 
 - 高斯朴素贝叶斯在测试集上的分类准确率和详细分类报告
-- 新样本 \(\mathbf{x}_0 = (4, 3)^T\) 被判归 \(G_1\)，与手工计算结果一致
+- 新样本 \\(\mathbf{x}_0 = (4, 3)^T\\) 被判归 \\(G_1\\)，与手工计算结果一致
 - GNB、LDA、QDA三种方法的对比，在等协方差情形下LDA表现最优
 - 可视化展示了三种方法的判别区域差异
 
@@ -573,7 +573,7 @@ print(f"后验概率: P(G1|x)={post[0,0]:.4f}, "
 
 ### 维数灾难问题
 
-当特征维数 \(p\) 较大而样本量 \(n\) 有限时：
+当特征维数 \\(p\\) 较大而样本量 \\(n\\) 有限时：
 
 - 协方差矩阵估计不稳定，甚至可能奇异
 - 可采用正则化方法（如收缩估计）

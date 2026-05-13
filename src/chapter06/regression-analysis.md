@@ -10,31 +10,31 @@
 
 ### 什么是回归分析
 
-回归分析（Regression Analysis）是一种确定两个或两个以上变量之间相互依赖的定量关系的统计分析方法。其基本思想是：虽然自变量 \( x \) 与因变量 \( y \) 之间的关系并不是确定性的，但可以通过统计方法找到一个最优的函数关系来近似描述它们之间的依赖关系。
+回归分析（Regression Analysis）是一种确定两个或两个以上变量之间相互依赖的定量关系的统计分析方法。其基本思想是：虽然自变量 \\( x \\) 与因变量 \\( y \\) 之间的关系并不是确定性的，但可以通过统计方法找到一个最优的函数关系来近似描述它们之间的依赖关系。
 
-设因变量为 \( Y \)，自变量为 \( x_1, x_2, \ldots, x_p \)，则回归模型的一般形式为：
+设因变量为 \\( Y \\)，自变量为 \\( x_1, x_2, \ldots, x_p \\)，则回归模型的一般形式为：
 
-\[
+\\[
 Y = f(x_1, x_2, \ldots, x_p) + \varepsilon
-\]
+\\]
 
-其中 \( f(\cdot) \) 是回归函数，\( \varepsilon \) 是随机误差项，通常假设 \( E(\varepsilon) = 0 \)，\( \text{Var}(\varepsilon) = \sigma^2 \)。
+其中 \\( f(\cdot) \\) 是回归函数，\\( \varepsilon \\) 是随机误差项，通常假设 \\( E(\varepsilon) = 0 \\)，\\( \text{Var}(\varepsilon) = \sigma^2 \\)。
 
 ### 回归分析的基本要素
 
-- **因变量**（响应变量）\( Y \)：需要预测或解释的目标变量
-- **自变量**（解释变量）\( x_1, x_2, \ldots, x_p \)：用于解释或预测因变量的变量
-- **回归系数** \( \beta_0, \beta_1, \ldots, \beta_p \)：描述自变量对因变量影响程度的参数
-- **随机误差** \( \varepsilon \)：模型未能解释的随机波动部分
+- **因变量**（响应变量）\\( Y \\)：需要预测或解释的目标变量
+- **自变量**（解释变量）\\( x_1, x_2, \ldots, x_p \\)：用于解释或预测因变量的变量
+- **回归系数** \\( \beta_0, \beta_1, \ldots, \beta_p \\)：描述自变量对因变量影响程度的参数
+- **随机误差** \\( \varepsilon \\)：模型未能解释的随机波动部分
 
 ### 回归分析的基本假设
 
 经典回归分析通常需要满足以下假设条件：
 
 1. **线性假设**：因变量与自变量之间存在线性关系
-2. **独立性假设**：观测值之间相互独立，即 \( \text{Cov}(\varepsilon_i, \varepsilon_j) = 0 \)（\( i \neq j \)）
-3. **正态性假设**：误差项服从正态分布，即 \( \varepsilon_i \sim N(0, \sigma^2) \)
-4. **等方差假设**：误差项具有相同的方差，即 \( \text{Var}(\varepsilon_i) = \sigma^2 \) 为常数
+2. **独立性假设**：观测值之间相互独立，即 \\( \text{Cov}(\varepsilon_i, \varepsilon_j) = 0 \\)（\\( i \neq j \\)）
+3. **正态性假设**：误差项服从正态分布，即 \\( \varepsilon_i \sim N(0, \sigma^2) \\)
+4. **等方差假设**：误差项具有相同的方差，即 \\( \text{Var}(\varepsilon_i) = \sigma^2 \\) 为常数
 5. **无多重共线性假设**：自变量之间不存在精确的线性关系
 
 ### 回归分析的基本步骤
@@ -54,13 +54,13 @@ Y = f(x_1, x_2, \ldots, x_p) + \varepsilon
 
 ### 相关分析的基本概念
 
-相关分析研究的是变量之间线性关系的密切程度。相关系数 \( r \) 的定义为：
+相关分析研究的是变量之间线性关系的密切程度。相关系数 \\( r \\) 的定义为：
 
-\[
+\\[
 r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2 \cdot \sum_{i=1}^{n}(y_i - \bar{y})^2}}
-\]
+\\]
 
-其中 \( r \in [-1, 1] \)，\( |r| \) 越接近 1 表示线性相关程度越高。
+其中 \\( r \in [-1, 1] \\)，\\( |r| \\) 越接近 1 表示线性相关程度越高。
 
 ### 二者的主要区别
 
@@ -75,14 +75,14 @@ r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i
 ### 二者的联系
 
 - 相关分析是回归分析的前提和基础，通常先进行相关分析判断变量间是否存在显著关系
-- 回归分析中的决定系数 \( R^2 \) 等于相关系数的平方（在一元线性回归中）
+- 回归分析中的决定系数 \\( R^2 \\) 等于相关系数的平方（在一元线性回归中）
 - 两种方法常结合使用，相互补充
 
 决定系数的定义为：
 
-\[
+\\[
 R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}} = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
-\]
+\\]
 
 ---
 
@@ -96,32 +96,32 @@ R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}} = 1 - \frac{\sum_{i=1}^{n}(y_i
 
 一元回归模型只包含一个自变量，最简单的一元线性回归模型为：
 
-\[
+\\[
 Y = \beta_0 + \beta_1 x + \varepsilon
-\]
+\\]
 
-其中 \( \beta_0 \) 为截距项，\( \beta_1 \) 为斜率，表示 \( x \) 每变化一个单位时 \( Y \) 的平均变化量。
+其中 \\( \beta_0 \\) 为截距项，\\( \beta_1 \\) 为斜率，表示 \\( x \\) 每变化一个单位时 \\( Y \\) 的平均变化量。
 
 #### 多元回归
 
 多元回归模型包含两个或两个以上的自变量，一般形式为：
 
-\[
+\\[
 Y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon
-\]
+\\]
 
 用矩阵形式表示为：
 
-\[
+\\[
 \mathbf{Y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon}
-\]
+\\]
 
 其中：
 
-\[
+\\[
 \mathbf{X} = \begin{pmatrix} 1 & x_{11} & x_{12} & \cdots & x_{1p} \\ 1 & x_{21} & x_{22} & \cdots & x_{2p} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 1 & x_{n1} & x_{n2} & \cdots & x_{np} \end{pmatrix}, \quad
 \boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{pmatrix}
-\]
+\\]
 
 ### 按函数形式分类
 
@@ -129,11 +129,11 @@ Y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p + \varepsilon
 
 线性回归是指因变量与参数之间呈线性关系的回归模型。需要注意的是，"线性"是指对参数的线性，而非对自变量的线性。例如，以下模型仍属于线性回归：
 
-\[
+\\[
 Y = \beta_0 + \beta_1 x + \beta_2 x^2 + \varepsilon
-\]
+\\]
 
-因为它对参数 \( \beta_0, \beta_1, \beta_2 \) 是线性的。
+因为它对参数 \\( \beta_0, \beta_1, \beta_2 \\) 是线性的。
 
 #### 非线性回归
 
@@ -141,23 +141,23 @@ Y = \beta_0 + \beta_1 x + \beta_2 x^2 + \varepsilon
 
 **指数模型**：
 
-\[
+\\[
 Y = \beta_0 e^{\beta_1 x} + \varepsilon
-\]
+\\]
 
 **幂函数模型**：
 
-\[
+\\[
 Y = \beta_0 x^{\beta_1} + \varepsilon
-\]
+\\]
 
 **Logistic 增长模型**：
 
-\[
+\\[
 Y = \frac{K}{1 + e^{-(\beta_0 + \beta_1 x)}} + \varepsilon
-\]
+\\]
 
-其中 \( K \) 为增长上限。
+其中 \\( K \\) 为增长上限。
 
 ### 其他分类方式
 
@@ -185,79 +185,79 @@ Y = \frac{K}{1 + e^{-(\beta_0 + \beta_1 x)}} + \varepsilon
 
 ### 基本原理
 
-对于线性回归模型 \( Y = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon} \)，最小二乘法的目标是找到参数向量 \( \hat{\boldsymbol{\beta}} \) 使得残差平方和最小：
+对于线性回归模型 \\( Y = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon} \\)，最小二乘法的目标是找到参数向量 \\( \hat{\boldsymbol{\beta}} \\) 使得残差平方和最小：
 
-\[
+\\[
 \hat{\boldsymbol{\beta}} = \arg\min_{\boldsymbol{\beta}} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \arg\min_{\boldsymbol{\beta}} (\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})^T (\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})
-\]
+\\]
 
 ### 一元线性回归的最小二乘估计
 
-对于一元线性回归 \( Y = \beta_0 + \beta_1 x + \varepsilon \)，设残差平方和为：
+对于一元线性回归 \\( Y = \beta_0 + \beta_1 x + \varepsilon \\)，设残差平方和为：
 
-\[
+\\[
 Q(\beta_0, \beta_1) = \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i)^2
-\]
+\\]
 
-分别对 \( \beta_0 \) 和 \( \beta_1 \) 求偏导并令其为零，解得：
+分别对 \\( \beta_0 \\) 和 \\( \beta_1 \\) 求偏导并令其为零，解得：
 
-\[
+\\[
 \hat{\beta}_1 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}
-\]
+\\]
 
-\[
+\\[
 \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
-\]
+\\]
 
 ### 多元线性回归的最小二乘估计
 
 利用矩阵微分可得正规方程（Normal Equations）：
 
-\[
+\\[
 \mathbf{X}^T \mathbf{X} \hat{\boldsymbol{\beta}} = \mathbf{X}^T \mathbf{Y}
-\]
+\\]
 
-当 \( \mathbf{X}^T \mathbf{X} \) 可逆时，参数的最小二乘估计为：
+当 \\( \mathbf{X}^T \mathbf{X} \\) 可逆时，参数的最小二乘估计为：
 
-\[
+\\[
 \hat{\boldsymbol{\beta}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{Y}
-\]
+\\]
 
 ### 最小二乘估计的性质
 
 在经典假设下，OLS 估计量具有以下优良性质：
 
-1. **无偏性**：\( E(\hat{\boldsymbol{\beta}}) = \boldsymbol{\beta} \)
+1. **无偏性**：\\( E(\hat{\boldsymbol{\beta}}) = \boldsymbol{\beta} \\)
 2. **最小方差性**（Gauss-Markov 定理）：在所有线性无偏估计中，OLS 估计量具有最小方差
-3. **一致性**：当样本量趋于无穷时，\( \hat{\boldsymbol{\beta}} \xrightarrow{P} \boldsymbol{\beta} \)
+3. **一致性**：当样本量趋于无穷时，\\( \hat{\boldsymbol{\beta}} \xrightarrow{P} \boldsymbol{\beta} \\)
 
-Gauss-Markov 定理表明：在满足 \( E(\boldsymbol{\varepsilon}) = \mathbf{0} \)、\( \text{Var}(\boldsymbol{\varepsilon}) = \sigma^2 \mathbf{I}_n \) 的条件下，OLS 估计量是最佳线性无偏估计量（BLUE）。
+Gauss-Markov 定理表明：在满足 \\( E(\boldsymbol{\varepsilon}) = \mathbf{0} \\)、\\( \text{Var}(\boldsymbol{\varepsilon}) = \sigma^2 \mathbf{I}_n \\) 的条件下，OLS 估计量是最佳线性无偏估计量（BLUE）。
 
 ### 参数估计的方差与显著性检验
 
 OLS 估计量的协方差矩阵为：
 
-\[
+\\[
 \text{Var}(\hat{\boldsymbol{\beta}}) = \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}
-\]
+\\]
 
-其中 \( \sigma^2 \) 的无偏估计为：
+其中 \\( \sigma^2 \\) 的无偏估计为：
 
-\[
+\\[
 \hat{\sigma}^2 = \frac{SS_{\text{res}}}{n - p - 1}
-\]
+\\]
 
-**t 检验**（单个系数检验）：检验 \( H_0: \beta_j = 0 \)，统计量为：
+**t 检验**（单个系数检验）：检验 \\( H_0: \beta_j = 0 \\)，统计量为：
 
-\[
+\\[
 t_j = \frac{\hat{\beta}_j}{\text{SE}(\hat{\beta}_j)} \sim t(n - p - 1)
-\]
+\\]
 
-**F 检验**（整体显著性检验）：检验 \( H_0: \beta_1 = \beta_2 = \cdots = \beta_p = 0 \)，统计量为：
+**F 检验**（整体显著性检验）：检验 \\( H_0: \beta_1 = \beta_2 = \cdots = \beta_p = 0 \\)，统计量为：
 
-\[
+\\[
 F = \frac{SS_{\text{reg}} / p}{SS_{\text{res}} / (n - p - 1)} \sim F(p, n - p - 1)
-\]
+\\]
 
 ---
 
@@ -271,23 +271,23 @@ F = \frac{SS_{\text{reg}} / p}{SS_{\text{res}} / (n - p - 1)} \sim F(p, n - p - 
 
 #### 残差的定义
 
-普通残差：\( e_i = y_i - \hat{y}_i \)
+普通残差：\\( e_i = y_i - \hat{y}_i \\)
 
 标准化残差：
 
-\[
+\\[
 r_i = \frac{e_i}{\hat{\sigma}\sqrt{1 - h_{ii}}}
-\]
+\\]
 
-其中 \( h_{ii} \) 是帽子矩阵 \( \mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \) 的第 \( i \) 个对角元素。
+其中 \\( h_{ii} \\) 是帽子矩阵 \\( \mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \\) 的第 \\( i \\) 个对角元素。
 
 学生化残差：
 
-\[
+\\[
 t_i = \frac{e_i}{\hat{\sigma}_{(i)}\sqrt{1 - h_{ii}}}
-\]
+\\]
 
-其中 \( \hat{\sigma}_{(i)} \) 是删除第 \( i \) 个观测后的残差标准差估计。
+其中 \\( \hat{\sigma}_{(i)} \\) 是删除第 \\( i \\) 个观测后的残差标准差估计。
 
 #### 残差图分析
 
@@ -300,11 +300,11 @@ t_i = \frac{e_i}{\hat{\sigma}_{(i)}\sqrt{1 - h_{ii}}}
 
 用于检测残差的一阶自相关：
 
-\[
+\\[
 DW = \frac{\sum_{i=2}^{n}(e_i - e_{i-1})^2}{\sum_{i=1}^{n} e_i^2}
-\]
+\\]
 
-当 \( DW \approx 2 \) 时无自相关；\( DW < 2 \) 正自相关；\( DW > 2 \) 负自相关。
+当 \\( DW \approx 2 \\) 时无自相关；\\( DW < 2 \\) 正自相关；\\( DW > 2 \\) 负自相关。
 
 ### 多重共线性
 
@@ -321,43 +321,43 @@ DW = \frac{\sum_{i=2}^{n}(e_i - e_{i-1})^2}{\sum_{i=1}^{n} e_i^2}
 
 **方差膨胀因子（VIF）**：
 
-\[
+\\[
 VIF_j = \frac{1}{1 - R_j^2}
-\]
+\\]
 
-其中 \( R_j^2 \) 是以 \( x_j \) 为因变量对其余自变量回归所得的决定系数。判断标准：
+其中 \\( R_j^2 \\) 是以 \\( x_j \\) 为因变量对其余自变量回归所得的决定系数。判断标准：
 
-- \( VIF_j < 5 \)：共线性不严重
-- \( 5 \leq VIF_j < 10 \)：中等共线性
-- \( VIF_j \geq 10 \)：严重共线性
+- \\( VIF_j < 5 \\)：共线性不严重
+- \\( 5 \leq VIF_j < 10 \\)：中等共线性
+- \\( VIF_j \geq 10 \\)：严重共线性
 
 **条件数**：
 
-\[
+\\[
 \kappa = \sqrt{\frac{\lambda_{\max}}{\lambda_{\min}}}
-\]
+\\]
 
-当 \( \kappa > 30 \) 时认为存在严重的多重共线性。
+当 \\( \kappa > 30 \\) 时认为存在严重的多重共线性。
 
 #### 多重共线性的处理方法
 
 - **剔除变量法**：删除引起共线性的冗余变量
 - **主成分回归**：将原始变量转化为正交的主成分
-- **岭回归**：添加 \( L_2 \) 惩罚项
+- **岭回归**：添加 \\( L_2 \\) 惩罚项
 
-\[
+\\[
 \hat{\boldsymbol{\beta}}_{\text{ridge}} = (\mathbf{X}^T\mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{Y}
-\]
+\\]
 
-- **LASSO 回归**：添加 \( L_1 \) 惩罚项，具有自动变量选择功能
+- **LASSO 回归**：添加 \\( L_1 \\) 惩罚项，具有自动变量选择功能
 
-\[
+\\[
 \hat{\boldsymbol{\beta}}_{\text{LASSO}} = \arg\min_{\boldsymbol{\beta}} \left\{ \sum_{i=1}^{n}(y_i - \mathbf{x}_i^T \boldsymbol{\beta})^2 + \lambda \sum_{j=1}^{p} |\beta_j| \right\}
-\]
+\\]
 
 ### 异方差
 
-> 异方差（Heteroscedasticity）是指误差项的方差不是常数，即 \( \text{Var}(\varepsilon_i) = \sigma_i^2 \) 随观测值变化而变化。
+> 异方差（Heteroscedasticity）是指误差项的方差不是常数，即 \\( \text{Var}(\varepsilon_i) = \sigma_i^2 \\) 随观测值变化而变化。
 
 #### 异方差的后果
 
@@ -369,33 +369,33 @@ VIF_j = \frac{1}{1 - R_j^2}
 
 **Breusch-Pagan 检验**：将残差平方对自变量回归，统计量为：
 
-\[
+\\[
 BP = nR^2_e \sim \chi^2(p)
-\]
+\\]
 
 **White 检验**：将残差平方对自变量、自变量的平方及交叉项回归：
 
-\[
+\\[
 e_i^2 = \alpha_0 + \alpha_1 x_{1i} + \alpha_2 x_{2i} + \alpha_3 x_{1i}^2 + \alpha_4 x_{2i}^2 + \alpha_5 x_{1i} x_{2i} + v_i
-\]
+\\]
 
-统计量 \( nR^2 \sim \chi^2(q) \)，其中 \( q \) 为辅助回归中自变量的个数。
+统计量 \\( nR^2 \sim \chi^2(q) \\)，其中 \\( q \\) 为辅助回归中自变量的个数。
 
 #### 异方差的处理方法
 
 - **加权最小二乘法（WLS）**：
 
-\[
+\\[
 \hat{\boldsymbol{\beta}}_{\text{WLS}} = (\mathbf{X}^T \mathbf{W} \mathbf{X})^{-1} \mathbf{X}^T \mathbf{W} \mathbf{Y}
-\]
+\\]
 
-其中 \( \mathbf{W} = \text{diag}(1/\sigma_1^2, 1/\sigma_2^2, \ldots, 1/\sigma_n^2) \)。
+其中 \\( \mathbf{W} = \text{diag}(1/\sigma_1^2, 1/\sigma_2^2, \ldots, 1/\sigma_n^2) \\)。
 
 - **稳健标准误**：使用 Huber-White 异方差一致协方差矩阵估计
 
-\[
+\\[
 \widehat{\text{Var}}(\hat{\boldsymbol{\beta}}) = (\mathbf{X}^T\mathbf{X})^{-1} \left( \sum_{i=1}^{n} e_i^2 \mathbf{x}_i \mathbf{x}_i^T \right) (\mathbf{X}^T\mathbf{X})^{-1}
-\]
+\\]
 
 - **变量变换**：对因变量取对数、平方根等变换以稳定方差
 
@@ -403,37 +403,37 @@ e_i^2 = \alpha_0 + \alpha_1 x_{1i} + \alpha_2 x_{2i} + \alpha_3 x_{1i}^2 + \alph
 
 #### 杠杆值
 
-帽子矩阵对角元 \( h_{ii} \) 衡量第 \( i \) 个观测在自变量空间中的远离程度：
+帽子矩阵对角元 \\( h_{ii} \\) 衡量第 \\( i \\) 个观测在自变量空间中的远离程度：
 
-\[
+\\[
 h_{ii} = \mathbf{x}_i^T (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{x}_i
-\]
+\\]
 
-通常以 \( 2(p+1)/n \) 为阈值判断高杠杆点。
+通常以 \\( 2(p+1)/n \\) 为阈值判断高杠杆点。
 
 #### Cook 距离
 
-Cook 距离综合衡量第 \( i \) 个观测对所有拟合值的影响：
+Cook 距离综合衡量第 \\( i \\) 个观测对所有拟合值的影响：
 
-\[
+\\[
 D_i = \frac{r_i^2}{p+1} \cdot \frac{h_{ii}}{1 - h_{ii}}
-\]
+\\]
 
-当 \( D_i > 4/n \) 或 \( D_i > 1 \) 时，第 \( i \) 个观测为强影响点。
+当 \\( D_i > 4/n \\) 或 \\( D_i > 1 \\) 时，第 \\( i \\) 个观测为强影响点。
 
 #### DFFITS 和 DFBETAS
 
 DFFITS 衡量单个观测对自身拟合值的影响：
 
-\[
+\\[
 \text{DFFITS}_i = t_i \sqrt{\frac{h_{ii}}{1 - h_{ii}}}
-\]
+\\]
 
 DFBETAS 衡量单个观测对各回归系数的影响：
 
-\[
+\\[
 \text{DFBETAS}_{j,i} = \frac{\hat{\beta}_j - \hat{\beta}_{j(i)}}{\hat{\sigma}_{(i)} \sqrt{c_{jj}}}
-\]
+\\]
 
 ---
 
@@ -446,9 +446,9 @@ DFBETAS 衡量单个观测对各回归系数的影响：
 - **宏观经济分析**：建立消费函数、投资函数等宏观经济模型
 - **金融资产定价**：资本资产定价模型（CAPM）即为典型的回归模型
 
-\[
+\\[
 E(R_i) - R_f = \beta_i [E(R_m) - R_f]
-\]
+\\]
 
 - **计量经济学**：估计供需弹性、政策效果评估
 - **风险管理**：VaR 模型、信用评分模型

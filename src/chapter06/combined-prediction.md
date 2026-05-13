@@ -18,33 +18,33 @@
 
 ### 数学表述
 
-假设有 \( m \) 种单一预测方法，第 \( i \) 种方法在时刻 \( t \) 的预测值为 \( \hat{y}_{it} \)，则组合预测的一般形式为：
+假设有 \\( m \\) 种单一预测方法，第 \\( i \\) 种方法在时刻 \\( t \\) 的预测值为 \\( \hat{y}_{it} \\)，则组合预测的一般形式为：
 
-\[
+\\[
 \hat{y}_t^c = f(\hat{y}_{1t}, \hat{y}_{2t}, \ldots, \hat{y}_{mt}; \boldsymbol{w})
-\]
+\\]
 
-其中 \( f(\cdot) \) 为组合函数，\( \boldsymbol{w} \) 为待确定的参数向量。当 \( f \) 为线性函数时：
+其中 \\( f(\cdot) \\) 为组合函数，\\( \boldsymbol{w} \\) 为待确定的参数向量。当 \\( f \\) 为线性函数时：
 
-\[
+\\[
 \hat{y}_t^c = \sum_{i=1}^{m} w_i \hat{y}_{it}, \quad \sum_{i=1}^{m} w_i = 1
-\]
+\\]
 
 ### 预测误差分析
 
-设第 \( i \) 种方法的预测误差为 \( e_{it} = y_t - \hat{y}_{it} \)，则组合预测的误差为：
+设第 \\( i \\) 种方法的预测误差为 \\( e_{it} = y_t - \hat{y}_{it} \\)，则组合预测的误差为：
 
-\[
+\\[
 e_t^c = y_t - \hat{y}_t^c = \sum_{i=1}^{m} w_i e_{it}
-\]
+\\]
 
 组合预测的均方误差为：
 
-\[
+\\[
 \text{MSE}^c = E\left[(e_t^c)^2\right] = \boldsymbol{w}^T \boldsymbol{\Sigma} \boldsymbol{w}
-\]
+\\]
 
-其中 \( \boldsymbol{\Sigma} \) 为各单一方法预测误差的协方差矩阵，\( \Sigma_{ij} = E[e_{it} e_{jt}] \)。
+其中 \\( \boldsymbol{\Sigma} \\) 为各单一方法预测误差的协方差矩阵，\\( \Sigma_{ij} = E[e_{it} e_{jt}] \\)。
 
 ---
 
@@ -54,25 +54,25 @@ e_t^c = y_t - \hat{y}_t^c = \sum_{i=1}^{m} w_i e_{it}
 
 > 等权组合是最简单的组合策略，给予每种预测方法相同的权重，适用于无法判断各方法优劣或历史数据有限的情况。
 
-\[
+\\[
 \hat{y}_t^c = \frac{1}{m} \sum_{i=1}^{m} \hat{y}_{it}
-\]
+\\]
 
 ### 等权组合的优势
 
-设各单一方法的预测误差方差均为 \( \sigma^2 \)，且误差之间的相关系数均为 \( \rho \)，则：
+设各单一方法的预测误差方差均为 \\( \sigma^2 \\)，且误差之间的相关系数均为 \\( \rho \\)，则：
 
-\[
+\\[
 \text{MSE}^c = \frac{\sigma^2}{m} + \frac{m-1}{m} \rho \sigma^2
-\]
+\\]
 
-当 \( \rho < 1 \) 时，有 \( \text{MSE}^c < \sigma^2 \)。特别地，当 \( \rho = 0 \) 时：
+当 \\( \rho < 1 \\) 时，有 \\( \text{MSE}^c < \sigma^2 \\)。特别地，当 \\( \rho = 0 \\) 时：
 
-\[
+\\[
 \text{MSE}^c = \frac{\sigma^2}{m}
-\]
+\\]
 
-此时组合预测的方差以 \( 1/m \) 的速度递减。
+此时组合预测的方差以 \\( 1/m \\) 的速度递减。
 
 ### 适用场景
 
@@ -89,37 +89,37 @@ e_t^c = y_t - \hat{y}_t^c = \sum_{i=1}^{m} w_i e_{it}
 
 > 最优加权组合通过最小化组合预测的均方误差来确定各方法的权重，是组合预测中最经典的方法。
 
-\[
+\\[
 \min_{\boldsymbol{w}} \; \boldsymbol{w}^T \boldsymbol{\Sigma} \boldsymbol{w}, \quad \text{s.t.} \; \boldsymbol{w}^T \boldsymbol{1} = 1
-\]
+\\]
 
 利用拉格朗日乘子法，最优权重为：
 
-\[
+\\[
 \boldsymbol{w}^* = \frac{\boldsymbol{\Sigma}^{-1} \boldsymbol{1}}{\boldsymbol{1}^T \boldsymbol{\Sigma}^{-1} \boldsymbol{1}}, \quad \text{MSE}^* = \frac{1}{\boldsymbol{1}^T \boldsymbol{\Sigma}^{-1} \boldsymbol{1}}
-\]
+\\]
 
 ### 非负权重约束
 
-实际应用中常添加 \( w_i \geq 0 \) 约束，优化问题变为二次规划（QP），可通过数值方法求解。
+实际应用中常添加 \\( w_i \geq 0 \\) 约束，优化问题变为二次规划（QP），可通过数值方法求解。
 
 ### 两种方法的特殊情况
 
-当 \( m = 2 \) 时，设误差方差分别为 \( \sigma_1^2, \sigma_2^2 \)，相关系数为 \( \rho \)：
+当 \\( m = 2 \\) 时，设误差方差分别为 \\( \sigma_1^2, \sigma_2^2 \\)，相关系数为 \\( \rho \\)：
 
-\[
+\\[
 w_1^* = \frac{\sigma_2^2 - \rho \sigma_1 \sigma_2}{\sigma_1^2 + \sigma_2^2 - 2\rho \sigma_1 \sigma_2}, \quad w_2^* = 1 - w_1^*
-\]
+\\]
 
 ### 基于误差平方和的简化方法
 
 忽略误差间相关性时，可用简化公式：
 
-\[
+\\[
 w_i = \frac{1/\text{SSE}_i}{\sum_{j=1}^{m} 1/\text{SSE}_j}
-\]
+\\]
 
-其中 \( \text{SSE}_i = \sum_{t=1}^{n} e_{it}^2 \) 为第 \( i \) 种方法的误差平方和。
+其中 \\( \text{SSE}_i = \sum_{t=1}^{n} e_{it}^2 \\) 为第 \\( i \\) 种方法的误差平方和。
 
 ---
 
@@ -129,27 +129,27 @@ w_i = \frac{1/\text{SSE}_i}{\sum_{j=1}^{m} 1/\text{SSE}_j}
 
 > 贝叶斯组合预测基于贝叶斯模型平均思想，将各模型的后验概率作为组合权重，自然地融入了模型不确定性。
 
-设模型集合为 \( \{M_1, M_2, \ldots, M_m\} \)，给定数据 \( D \)：
+设模型集合为 \\( \{M_1, M_2, \ldots, M_m\} \\)，给定数据 \\( D \\)：
 
-\[
+\\[
 p(y_{n+1} | D) = \sum_{i=1}^{m} p(y_{n+1} | M_i, D) \cdot p(M_i | D)
-\]
+\\]
 
 模型后验概率为：
 
-\[
+\\[
 p(M_i | D) = \frac{p(D | M_i) \cdot p(M_i)}{\sum_{j=1}^{m} p(D | M_j) \cdot p(M_j)}
-\]
+\\]
 
 ### 边际似然计算
 
-模型 \( M_i \) 的边际似然常用BIC近似：
+模型 \\( M_i \\) 的边际似然常用BIC近似：
 
-\[
+\\[
 \log p(D | M_i) \approx \log p(D | \hat{\boldsymbol{\theta}}_i, M_i) - \frac{k_i}{2} \log n
-\]
+\\]
 
-其中 \( k_i \) 为参数个数，\( n \) 为样本量。
+其中 \\( k_i \\) 为参数个数，\\( n \\) 为样本量。
 
 ### 贝叶斯组合的优点
 
@@ -170,33 +170,33 @@ p(M_i | D) = \frac{p(D | M_i) \cdot p(M_i)}{\sum_{j=1}^{m} p(D | M_j) \cdot p(M_
 
 **对数线性组合**：
 
-\[
+\\[
 \hat{y}_t^c = \prod_{i=1}^{m} \hat{y}_{it}^{w_i}, \quad \sum_{i=1}^m w_i = 1
-\]
+\\]
 
 **神经网络组合**：
 
-\[
+\\[
 \hat{y}_t^c = g\left(\sum_{j=1}^{h} v_j \cdot \phi\left(\sum_{i=1}^{m} w_{ji} \hat{y}_{it} + b_j\right) + b_0\right)
-\]
+\\]
 
-其中 \( \phi(\cdot) \) 为隐层激活函数，\( g(\cdot) \) 为输出层激活函数。
+其中 \\( \phi(\cdot) \\) 为隐层激活函数，\\( g(\cdot) \\) 为输出层激活函数。
 
 **核方法组合**：
 
-\[
+\\[
 \hat{y}_t^c = \sum_{s=1}^{n} \alpha_s K(\hat{\boldsymbol{y}}_t, \hat{\boldsymbol{y}}_s) + b
-\]
+\\]
 
 ### 自适应组合
 
 时变权重组合允许权重随时间动态调整：
 
-\[
+\\[
 w_{i,t} = \frac{\exp(-\lambda \sum_{s=1}^{t-1} e_{is}^2)}{\sum_{j=1}^{m} \exp(-\lambda \sum_{s=1}^{t-1} e_{js}^2)}
-\]
+\\]
 
-其中 \( \lambda > 0 \) 为学习率参数，控制对历史误差的遗忘速度。
+其中 \\( \lambda > 0 \\) 为学习率参数，控制对历史误差的遗忘速度。
 
 ---
 
@@ -206,35 +206,35 @@ w_{i,t} = \frac{\exp(-\lambda \sum_{s=1}^{t-1} e_{is}^2)}{\sum_{j=1}^{m} \exp(-\
 
 > 对于任意满足权重归一化约束的线性组合，其均方误差不超过各单一方法中最大者。
 
-\[
+\\[
 \text{MSE}^c = \boldsymbol{w}^T \boldsymbol{\Sigma} \boldsymbol{w} \leq \max_i \sigma_i^2
-\]
+\\]
 
 ### 定理2：最优组合不劣于最优单一方法
 
 > 最优加权组合的均方误差不超过任何单一方法的均方误差。
 
-\[
+\\[
 \text{MSE}^* = \frac{1}{\boldsymbol{1}^T \boldsymbol{\Sigma}^{-1} \boldsymbol{1}} \leq \min_i \sigma_i^2
-\]
+\\]
 
-**证明**：设 \( \boldsymbol{e}_k \) 为第 \( k \) 个标准基向量，则 \( \sigma_k^2 = \boldsymbol{e}_k^T \boldsymbol{\Sigma} \boldsymbol{e}_k \geq \min_{\boldsymbol{w}^T \boldsymbol{1}=1} \boldsymbol{w}^T \boldsymbol{\Sigma} \boldsymbol{w} = \text{MSE}^* \)。
+**证明**：设 \\( \boldsymbol{e}_k \\) 为第 \\( k \\) 个标准基向量，则 \\( \sigma_k^2 = \boldsymbol{e}_k^T \boldsymbol{\Sigma} \boldsymbol{e}_k \geq \min_{\boldsymbol{w}^T \boldsymbol{1}=1} \boldsymbol{w}^T \boldsymbol{\Sigma} \boldsymbol{w} = \text{MSE}^* \\)。
 
 ### 定理3：组合收益的上界
 
-\[
+\\[
 \frac{\min_i \sigma_i^2 - \text{MSE}^*}{\min_i \sigma_i^2} \leq 1 - \frac{1}{m}
-\]
+\\]
 
 当各方法误差等方差且不相关时等号成立，此时组合收益最大。
 
 ### 定理4：多样性分解
 
-\[
+\\[
 \text{MSE}^c = \overline{\text{MSE}} - D
-\]
+\\]
 
-其中 \( \overline{\text{MSE}} = \sum_{i=1}^{m} w_i \cdot \text{MSE}_i \) 为加权平均误差，\( D = \sum_{i=1}^{m} w_i (\hat{y}_{it} - \hat{y}_t^c)^2 \) 为多样性度量。
+其中 \\( \overline{\text{MSE}} = \sum_{i=1}^{m} w_i \cdot \text{MSE}_i \\) 为加权平均误差，\\( D = \sum_{i=1}^{m} w_i (\hat{y}_{it} - \hat{y}_t^c)^2 \\) 为多样性度量。
 
 > 该定理表明：组合预测的精度提升来源于个体方法的多样性。方法间差异越大，组合收益越大。
 
@@ -260,21 +260,21 @@ w_{i,t} = \frac{\exp(-\lambda \sum_{s=1}^{t-1} e_{is}^2)}{\sum_{j=1}^{m} \exp(-\
 ### 误差分析
 
 误差平方和：
-- ARIMA：\( \text{SSE}_1 = 199 \)
-- 指数平滑：\( \text{SSE}_2 = 49 \)
-- 回归：\( \text{SSE}_3 = 145 \)
+- ARIMA：\\( \text{SSE}_1 = 199 \\)
+- 指数平滑：\\( \text{SSE}_2 = 49 \\)
+- 回归：\\( \text{SSE}_3 = 145 \\)
 
 ### 等权组合结果
 
-等权组合的 \( \text{SSE}^{\text{eq}} = 8.67 \)，显著优于任何单一方法。这得益于ARIMA和回归方法的误差方向相反，相互抵消。
+等权组合的 \\( \text{SSE}^{\text{eq}} = 8.67 \\)，显著优于任何单一方法。这得益于ARIMA和回归方法的误差方向相反，相互抵消。
 
 ### 最优加权组合结果
 
-\[
+\\[
 w_1 = 0.163, \quad w_2 = 0.662, \quad w_3 = 0.224
-\]
+\\]
 
-加权组合 \( \text{SSE}^{\text{opt}} \approx 3.25 \)，进一步优于等权组合。
+加权组合 \\( \text{SSE}^{\text{opt}} \approx 3.25 \\)，进一步优于等权组合。
 
 ---
 
@@ -426,7 +426,7 @@ if __name__ == '__main__':
 > 组合预测并非万能良药，正确选择组合策略和参与组合的单一方法至关重要。
 
 1. **方法多样性**：参与组合的方法应基于不同的建模思路，避免高度相似的方法重复计入
-2. **样本量要求**：最优加权需足够历史数据估计协方差矩阵，建议 \( n > 3m \)
+2. **样本量要求**：最优加权需足够历史数据估计协方差矩阵，建议 \\( n > 3m \\)
 3. **权重稳定性**：协方差矩阵接近奇异时，应考虑等权组合或正则化方法
 
 ### 常见陷阱
@@ -439,7 +439,7 @@ if __name__ == '__main__':
 ### 改进策略
 
 - **交叉验证**：使用时间序列交叉验证确定权重，避免过拟合
-- **收缩估计**：\( \boldsymbol{w}^{\text{shrink}} = \alpha \boldsymbol{w}^* + (1-\alpha) \boldsymbol{w}^{\text{eq}} \)
+- **收缩估计**：\\( \boldsymbol{w}^{\text{shrink}} = \alpha \boldsymbol{w}^* + (1-\alpha) \boldsymbol{w}^{\text{eq}} \\)
 - **滚动窗口**：使用滚动窗口更新权重，适应分布变化
 - **模型筛选**：先剔除明显劣质方法，再对保留方法进行组合
 

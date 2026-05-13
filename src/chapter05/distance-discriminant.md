@@ -10,24 +10,24 @@
 
 ### 判别思想
 
-设有 \( k \) 个总体 \( G_1, G_2, \ldots, G_k \)，每个总体都是 \( p \) 维随机向量的分布。对于一个新的观测样品 \( \mathbf{x} = (x_1, x_2, \ldots, x_p)^T \)，距离判别法的判别规则为：
+设有 \\( k \\) 个总体 \\( G_1, G_2, \ldots, G_k \\)，每个总体都是 \\( p \\) 维随机向量的分布。对于一个新的观测样品 \\( \mathbf{x} = (x_1, x_2, \ldots, x_p)^T \\)，距离判别法的判别规则为：
 
-\[
+\\[
 \text{若} \quad d(\mathbf{x}, G_i) = \min_{1 \leq j \leq k} d(\mathbf{x}, G_j), \quad \text{则判} \quad \mathbf{x} \in G_i
-\]
+\\]
 
-其中 \( d(\mathbf{x}, G_j) \) 表示样品 \( \mathbf{x} \) 到总体 \( G_j \) 的距离。
+其中 \\( d(\mathbf{x}, G_j) \\) 表示样品 \\( \mathbf{x} \\) 到总体 \\( G_j \\) 的距离。
 
 ### 距离的度量
 
 关键问题在于如何定义样品到总体的距离，通常有两种方式：
 
-1. **样品到总体均值的距离**：用总体均值 \( \boldsymbol{\mu}_j \) 代表总体 \( G_j \)
+1. **样品到总体均值的距离**：用总体均值 \\( \boldsymbol{\mu}_j \\) 代表总体 \\( G_j \\)
 2. **样品到总体的广义距离**：考虑总体的协方差结构，使用马氏距离
 
 ### 判别准则的合理性
 
-当各总体服从正态分布且协方差矩阵相等时，距离判别法等价于贝叶斯判别（在先验概率相等的条件下）。若 \( G_j \sim N_p(\boldsymbol{\mu}_j, \boldsymbol{\Sigma}) \)，则最小马氏距离判别等价于最大后验概率判别。
+当各总体服从正态分布且协方差矩阵相等时，距离判别法等价于贝叶斯判别（在先验概率相等的条件下）。若 \\( G_j \sim N_p(\boldsymbol{\mu}_j, \boldsymbol{\Sigma}) \\)，则最小马氏距离判别等价于最大后验概率判别。
 
 ---
 
@@ -37,11 +37,11 @@
 
 ### 欧氏距离
 
-两点 \( \mathbf{x} \) 与 \( \mathbf{y} \) 之间的欧氏距离定义为：
+两点 \\( \mathbf{x} \\) 与 \\( \mathbf{y} \\) 之间的欧氏距离定义为：
 
-\[
+\\[
 d_E(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x} - \mathbf{y})^T (\mathbf{x} - \mathbf{y})} = \sqrt{\sum_{i=1}^{p}(x_i - y_i)^2}
-\]
+\\]
 
 **欧氏距离的局限性：**
 
@@ -55,22 +55,22 @@ d_E(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x} - \mathbf{y})^T (\mathbf{x} - \m
 
 **样品到总体的马氏距离：**
 
-\[
+\\[
 d_M(\mathbf{x}, G_j) = \sqrt{(\mathbf{x} - \boldsymbol{\mu}_j)^T \boldsymbol{\Sigma}_j^{-1} (\mathbf{x} - \boldsymbol{\mu}_j)}
-\]
+\\]
 
 马氏距离的平方形式为：
 
-\[
+\\[
 d_M^2(\mathbf{x}, G_j) = (\mathbf{x} - \boldsymbol{\mu}_j)^T \boldsymbol{\Sigma}_j^{-1} (\mathbf{x} - \boldsymbol{\mu}_j)
-\]
+\\]
 
 ### 马氏距离的性质
 
-1. **平移不变性**：\( d_M(\mathbf{x} + \mathbf{a}, \mathbf{y} + \mathbf{a}) = d_M(\mathbf{x}, \mathbf{y}) \)
-2. **尺度不变性**：对非退化线性变换 \( \mathbf{z} = A\mathbf{x} \)，马氏距离不变
+1. **平移不变性**：\\( d_M(\mathbf{x} + \mathbf{a}, \mathbf{y} + \mathbf{a}) = d_M(\mathbf{x}, \mathbf{y}) \\)
+2. **尺度不变性**：对非退化线性变换 \\( \mathbf{z} = A\mathbf{x} \\)，马氏距离不变
 3. **消除相关性**：通过协方差矩阵的逆矩阵消除了变量间的相关性
-4. **退化为欧氏距离**：当 \( \boldsymbol{\Sigma} = \mathbf{I} \) 时，马氏距离退化为欧氏距离
+4. **退化为欧氏距离**：当 \\( \boldsymbol{\Sigma} = \mathbf{I} \\) 时，马氏距离退化为欧氏距离
 
 ### 几何解释
 
@@ -84,45 +84,45 @@ d_M^2(\mathbf{x}, G_j) = (\mathbf{x} - \boldsymbol{\mu}_j)^T \boldsymbol{\Sigma}
 
 ### 情形一：协方差矩阵相等
 
-当 \( \boldsymbol{\Sigma}_1 = \boldsymbol{\Sigma}_2 = \boldsymbol{\Sigma} \) 时，展开化简得到判别函数：
+当 \\( \boldsymbol{\Sigma}_1 = \boldsymbol{\Sigma}_2 = \boldsymbol{\Sigma} \\) 时，展开化简得到判别函数：
 
-\[
+\\[
 W(\mathbf{x}) = (\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)^T \boldsymbol{\Sigma}^{-1} \mathbf{x} - \frac{1}{2}(\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2)
-\]
+\\]
 
 **判别规则：**
 
-\[
+\\[
 \begin{cases}
 W(\mathbf{x}) \geq 0, & \text{判} \; \mathbf{x} \in G_1 \\\\
 W(\mathbf{x}) < 0, & \text{判} \; \mathbf{x} \in G_2
 \end{cases}
-\]
+\\]
 
-令 \( \mathbf{a} = \boldsymbol{\Sigma}^{-1}(\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2) \)，\( \bar{\boldsymbol{\mu}} = \frac{1}{2}(\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2) \)，则：
+令 \\( \mathbf{a} = \boldsymbol{\Sigma}^{-1}(\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2) \\)，\\( \bar{\boldsymbol{\mu}} = \frac{1}{2}(\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2) \\)，则：
 
-\[
+\\[
 W(\mathbf{x}) = \mathbf{a}^T(\mathbf{x} - \bar{\boldsymbol{\mu}})
-\]
+\\]
 
 ### 情形二：协方差矩阵不等
 
-当 \( \boldsymbol{\Sigma}_1 \neq \boldsymbol{\Sigma}_2 \) 时，判别边界不再是超平面，而是二次曲面：
+当 \\( \boldsymbol{\Sigma}_1 \neq \boldsymbol{\Sigma}_2 \\) 时，判别边界不再是超平面，而是二次曲面：
 
-\[
+\\[
 \begin{cases}
 d^2(\mathbf{x}, G_1) \leq d^2(\mathbf{x}, G_2), & \text{判} \; \mathbf{x} \in G_1 \\\\
 d^2(\mathbf{x}, G_1) > d^2(\mathbf{x}, G_2), & \text{判} \; \mathbf{x} \in G_2
 \end{cases}
-\]
+\\]
 
 ### 参数的样本估计
 
-总体参数未知时，用样本均值 \( \bar{\mathbf{x}}_j \) 估计 \( \boldsymbol{\mu}_j \)，用样本协方差矩阵 \( \mathbf{S}_j \) 估计 \( \boldsymbol{\Sigma}_j \)。协方差矩阵相等时使用合并协方差矩阵：
+总体参数未知时，用样本均值 \\( \bar{\mathbf{x}}_j \\) 估计 \\( \boldsymbol{\mu}_j \\)，用样本协方差矩阵 \\( \mathbf{S}_j \\) 估计 \\( \boldsymbol{\Sigma}_j \\)。协方差矩阵相等时使用合并协方差矩阵：
 
-\[
+\\[
 \mathbf{S}_p = \frac{(n_1 - 1)\mathbf{S}_1 + (n_2 - 1)\mathbf{S}_2}{n_1 + n_2 - 2}
-\]
+\\]
 
 ---
 
@@ -132,29 +132,29 @@ d^2(\mathbf{x}, G_1) > d^2(\mathbf{x}, G_2), & \text{判} \; \mathbf{x} \in G_2
 
 ### 一般判别规则
 
-设有 \( k \) 个总体，对新样品 \( \mathbf{x} \)，若
+设有 \\( k \\) 个总体，对新样品 \\( \mathbf{x} \\)，若
 
-\[
+\\[
 d^2(\mathbf{x}, G_i) = \min_{1 \leq j \leq k} d^2(\mathbf{x}, G_j)
-\]
+\\]
 
-则判 \( \mathbf{x} \in G_i \)。
+则判 \\( \mathbf{x} \in G_i \\)。
 
 ### 协方差矩阵相等时的等价判别规则
 
-判 \( \mathbf{x} \in G_i \)，若对所有 \( j \neq i \)：
+判 \\( \mathbf{x} \in G_i \\)，若对所有 \\( j \neq i \\)：
 
-\[
+\\[
 (\boldsymbol{\mu}_i - \boldsymbol{\mu}_j)^T \boldsymbol{\Sigma}^{-1} \mathbf{x} - \frac{1}{2}(\boldsymbol{\mu}_i - \boldsymbol{\mu}_j)^T \boldsymbol{\Sigma}^{-1}(\boldsymbol{\mu}_i + \boldsymbol{\mu}_j) \geq 0
-\]
+\\]
 
 ### 合并协方差矩阵
 
-\[
+\\[
 \mathbf{S}_p = \frac{\sum_{j=1}^{k}(n_j - 1)\mathbf{S}_j}{N - k}
-\]
+\\]
 
-其中 \( N = \sum_{j=1}^{k} n_j \) 为总样本量。
+其中 \\( N = \sum_{j=1}^{k} n_j \\) 为总样本量。
 
 ### 判别效果的评价
 
@@ -170,59 +170,59 @@ d^2(\mathbf{x}, G_i) = \min_{1 \leq j \leq k} d^2(\mathbf{x}, G_j)
 
 ### 案例背景
 
-某银行将贷款申请人分为两类：\( G_1 \)（信用良好）和 \( G_2 \)（信用不良），考察三个指标：年收入 \( x_1 \)（万元）、资产负债率 \( x_2 \)（%）、信用评分 \( x_3 \)（百分制）。
+某银行将贷款申请人分为两类：\\( G_1 \\)（信用良好）和 \\( G_2 \\)（信用不良），考察三个指标：年收入 \\( x_1 \\)（万元）、资产负债率 \\( x_2 \\)（%）、信用评分 \\( x_3 \\)（百分制）。
 
 ### 训练数据
 
-**信用良好组（\( n_1 = 5 \)）：** (15,25,82), (20,20,88), (18,30,75), (25,15,90), (22,22,85)
+**信用良好组（\\( n_1 = 5 \\)）：** (15,25,82), (20,20,88), (18,30,75), (25,15,90), (22,22,85)
 
-**信用不良组（\( n_2 = 5 \)）：** (8,55,50), (10,48,58), (6,60,45), (12,42,62), (9,50,55)
+**信用不良组（\\( n_2 = 5 \\)）：** (8,55,50), (10,48,58), (6,60,45), (12,42,62), (9,50,55)
 
 ### 计算过程
 
 **第一步：计算样本均值向量**
 
-\[
+\\[
 \bar{\mathbf{x}}_1 = \begin{pmatrix} 20 \\\\ 22.4 \\\\ 84 \end{pmatrix}, \quad
 \bar{\mathbf{x}}_2 = \begin{pmatrix} 9 \\\\ 51 \\\\ 54 \end{pmatrix}
-\]
+\\]
 
 **第二步：计算样本协方差矩阵**
 
-\[
+\\[
 \mathbf{S}_1 = \begin{pmatrix} 14.5 & -18.0 & 16.75 \\\\ -18.0 & 32.2 & -31.6 \\\\ 16.75 & -31.6 & 34.5 \end{pmatrix}, \quad
 \mathbf{S}_2 = \begin{pmatrix} 4.5 & -10.5 & 10.5 \\\\ -10.5 & 43.5 & -35.5 \\\\ 10.5 & -35.5 & 38.5 \end{pmatrix}
-\]
+\\]
 
 **第三步：计算合并协方差矩阵**
 
-\[
+\\[
 \mathbf{S}_p = \frac{\mathbf{S}_1 + \mathbf{S}_2}{2} = \begin{pmatrix} 9.5 & -14.25 & 13.625 \\\\ -14.25 & 37.85 & -33.55 \\\\ 13.625 & -33.55 & 36.5 \end{pmatrix}
-\]
+\\]
 
 **第四步：计算判别系数向量**
 
-求解 \( \mathbf{S}_p \mathbf{a} = \bar{\mathbf{x}}_1 - \bar{\mathbf{x}}_2 = (11, -28.6, 30)^T \)，得：
+求解 \\( \mathbf{S}_p \mathbf{a} = \bar{\mathbf{x}}_1 - \bar{\mathbf{x}}_2 = (11, -28.6, 30)^T \\)，得：
 
-\[
+\\[
 \mathbf{a} \approx (0.586, -0.312, 0.427)^T
-\]
+\\]
 
 **第五步：计算判别临界值**
 
-\[
+\\[
 y_0 = \mathbf{a}^T \cdot \frac{\bar{\mathbf{x}}_1 + \bar{\mathbf{x}}_2}{2} = 0.586 \times 14.5 + (-0.312) \times 36.7 + 0.427 \times 69 \approx 26.57
-\]
+\\]
 
 **第六步：对新样品判别**
 
-设新申请人 \( \mathbf{x}_0 = (16, 35, 70)^T \)：
+设新申请人 \\( \mathbf{x}_0 = (16, 35, 70)^T \\)：
 
-\[
+\\[
 y(\mathbf{x}_0) = 0.586 \times 16 + (-0.312) \times 35 + 0.427 \times 70 = 28.35
-\]
+\\]
 
-由于 \( y(\mathbf{x}_0) = 28.35 > y_0 = 26.57 \)，判定该申请人属于 \( G_1 \)（信用良好）。
+由于 \\( y(\mathbf{x}_0) = 28.35 > y_0 = 26.57 \\)，判定该申请人属于 \\( G_1 \\)（信用良好）。
 
 ### 回代检验
 
@@ -460,13 +460,13 @@ def evaluate_discriminant(model, X_train, y_train, X_test=None, y_test=None):
 
 1. **正态性假设**：各总体服从多元正态分布时具有最优性，严重偏斜可能导致效果下降
 2. **协方差矩阵的选择**：可用Box's M检验决定使用线性或二次判别
-3. **样本量要求**：经验法则 \( n_j \geq 5p \)，样本量不足时协方差矩阵估计不稳定
+3. **样本量要求**：经验法则 \\( n_j \geq 5p \\)，样本量不足时协方差矩阵估计不稳定
 
 ### 常见问题与处理
 
-**协方差矩阵奇异：** 样本量小于变量数时矩阵不可逆，可用正则化 \( \mathbf{S}_{reg} = (1-\alpha)\mathbf{S} + \alpha \cdot \text{diag}(\mathbf{S}) \)、PCA降维或广义逆处理。
+**协方差矩阵奇异：** 样本量小于变量数时矩阵不可逆，可用正则化 \\( \mathbf{S}_{reg} = (1-\alpha)\mathbf{S} + \alpha \cdot \text{diag}(\mathbf{S}) \\)、PCA降维或广义逆处理。
 
-**变量量纲不一致：** 若不使用马氏距离，需先标准化：\( z_{ij} = (x_{ij} - \bar{x}_j) / s_j \)
+**变量量纲不一致：** 若不使用马氏距离，需先标准化：\\( z_{ij} = (x_{ij} - \bar{x}_j) / s_j \\)
 
 **多重共线性：** 协方差矩阵条件数过大导致计算不稳定，建议变量筛选或正则化。
 
@@ -485,19 +485,19 @@ def evaluate_discriminant(model, X_train, y_train, X_test=None, y_test=None):
 
 1. **加权距离判别**：对不同变量赋予不同权重
 
-\[
+\\[
 d_W^2(\mathbf{x}, G_j) = (\mathbf{x} - \boldsymbol{\mu}_j)^T \mathbf{W} \boldsymbol{\Sigma}_j^{-1} (\mathbf{x} - \boldsymbol{\mu}_j)
-\]
+\\]
 
 2. **核距离判别**：通过核函数处理非线性判别问题
 
-3. **正则化判别**：\( \boldsymbol{\Sigma}_{reg} = (1 - \gamma)\hat{\boldsymbol{\Sigma}} + \gamma \mathbf{I} \)
+3. **正则化判别**：\\( \boldsymbol{\Sigma}_{reg} = (1 - \gamma)\hat{\boldsymbol{\Sigma}} + \gamma \mathbf{I} \\)
 
 4. **结合先验信息**：当先验概率不等时修正规则：
 
-\[
+\\[
 \text{判} \; \mathbf{x} \in G_i \quad \text{若} \quad d^2(\mathbf{x}, G_i) - 2\ln\pi_i = \min_j \{d^2(\mathbf{x}, G_j) - 2\ln\pi_j\}
-\]
+\\]
 
 ### 实际应用建议
 
