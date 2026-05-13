@@ -129,36 +129,14 @@
 
 ---
 
-## 第四部分：软件工具与实战
+## 第四部分：AI Native 建模
 
-- [建模软件工具](./chapter09/modeling-tools.md)
-  - [MATLAB数学建模](./chapter09/matlab.md)
-  - [Python数学建模](./chapter09/python.md)
-  - [R语言建模](./chapter09/r-language.md)
-  - [SPSS统计建模](./chapter09/spss.md)
-  - [Lingo优化求解](./chapter09/lingo.md)
-  - [Excel建模应用](./chapter09/excel.md)
-
-- [综合案例分析](./chapter10/comprehensive-cases.md)
-  - [竞赛经典案例](./chapter10/competition-cases.md)
-    - [美国大学生数学建模竞赛案例](./chapter10/mcm-cases.md)
-    - [全国大学生数学建模竞赛案例](./chapter10/cumcm-cases.md)
-    - [其他国际竞赛案例](./chapter10/other-competition-cases.md)
-  - [实际应用案例](./chapter10/practical-cases.md)
-    - [经济金融建模](./chapter10/financial-cases.md)
-    - [工程技术建模](./chapter10/engineering-cases.md)
-    - [社会科学建模](./chapter10/social-science-cases.md)
-    - [生物医学建模](./chapter10/biomedical-cases.md)
-    - [环境科学建模](./chapter10/environmental-cases.md)
-  - [解题策略与技巧](./chapter10/solving-strategies.md)
-  - [论文写作指导](./chapter10/paper-writing.md)
-
----
-
-## 附录
-
-- [附录A 常用数学公式](./appendix/formulas.md)
-- [附录B 软件安装指南](./appendix/software-installation.md)
-- [附录C 参考资料](./appendix/references.md)
-- [附录D 习题答案](./appendix/solutions.md)
-- [附录E 建模竞赛资源](./appendix/competition-resources.md)
+- [AI Native 时代的数学建模](./chapter09/ai-native-modeling.md)
+  - [AI 辅助建模工作流](./chapter09/ai-modeling-workflow.md)
+  - [AI 辅助问题分析与建模思路](./chapter09/problem-analysis-with-ai.md)
+  - [AI 辅助模型选择与设计](./chapter09/model-selection-with-ai.md)
+  - [AI 代码生成与调试](./chapter09/code-generation-with-ai.md)
+  - [AI 辅助论文撰写](./chapter09/paper-writing-with-ai.md)
+  - [Prompt Engineering 建模技巧](./chapter09/prompt-engineering.md)
+  - [Agent 编排与自动化建模](./chapter09/agent-orchestration.md)
+  - [AI 建模工具生态](./chapter09/ai-tools-ecosystem.md)
